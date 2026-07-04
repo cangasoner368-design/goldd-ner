@@ -24,6 +24,9 @@
             --white: #ffffff;
             --gray: #aaaaaa;
             --red: #C41E3A;
+            --green: #25D366;
+            --allergen-bg: #fff3cd;
+            --allergen-text: #856404;
         }
 
         html {
@@ -638,6 +641,36 @@
             margin: 0;
         }
 
+        /* LEGAL INFO BANNER */
+        .legal-banner {
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .legal-banner .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .legal-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 50px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .legal-badge i {
+            font-size: 1.2rem;
+        }
+
         /* MENU SECTION */
         .menu-section {
             padding: 100px 0;
@@ -679,8 +712,8 @@
 
         .menu-item {
             display: flex;
-            align-items: center;
-            gap: 20px;
+            flex-direction: column;
+            gap: 15px;
             background: var(--dark-card);
             border-radius: 15px;
             padding: 20px;
@@ -690,7 +723,13 @@
 
         .menu-item:hover {
             border-color: rgba(212,160,23,0.2);
-            transform: translateX(5px);
+            transform: translateY(-5px);
+        }
+
+        .menu-item-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
         .menu-item-image {
@@ -735,6 +774,157 @@
             background: linear-gradient(135deg, var(--red), #8B0000);
             padding: 8px 15px;
             border-radius: 8px;
+        }
+
+        /* NUTRITION INFO */
+        .nutrition-info {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        .nutrition-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .nutrition-row:last-child {
+            border-bottom: none;
+        }
+
+        .nutrition-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .nutrition-label i {
+            color: var(--gold);
+            width: 20px;
+        }
+
+        .nutrition-value {
+            color: var(--white);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .calorie-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .calorie-badge i {
+            font-size: 0.8rem;
+        }
+
+        /* ALLERGEN TAGS */
+        .allergen-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .allergen-tag {
+            background: var(--allergen-bg);
+            color: var(--allergen-text);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .allergen-tag i {
+            font-size: 0.7rem;
+        }
+
+        .allergen-tag.gluten { background: #ffe5b4; }
+        .allergen-tag.dairy { background: #cfe2ff; }
+        .allergen-tag.egg { background: #fff3cd; }
+        .allergen-tag.sesame { background: #f8d7da; }
+        .allergen-tag.soy { background: #d1e7dd; }
+        .allergen-tag.peanut { background: #e2e3e5; }
+
+        /* QR CODE SECTION */
+        .qr-section {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin: 40px 0;
+            border: 2px solid var(--gold);
+        }
+
+        .qr-section h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .qr-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            background: var(--white);
+            border-radius: 15px;
+            padding: 10px;
+        }
+
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .qr-info {
+            text-align: left;
+            max-width: 400px;
+        }
+
+        .qr-info p {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .qr-info ul {
+            list-style: none;
+        }
+
+        .qr-info ul li {
+            padding: 8px 0;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qr-info ul li i {
+            color: var(--gold);
         }
 
         .menu-category {
@@ -1162,6 +1352,11 @@
             .about-stats {
                 grid-template-columns: repeat(3, 1fr);
             }
+
+            .legal-banner .container {
+                flex-direction: column;
+                gap: 15px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1257,7 +1452,7 @@
     <div id="preloader">
         <div class="loader">
             <div class="loader-icon">🥙</div>
-            <p>KEÇİÖREN GECE KOKOREÇCİ VE DÖNERCİSİ</p>
+            <p>KEÇİÖREN GECE KOKOREÇÇİ VE DÖNERCİSİ</p>
         </div>
     </div>
 
@@ -1305,6 +1500,28 @@
             <a href="#kartlar"><i class="fas fa-chevron-down"></i></a>
         </div>
     </section>
+
+    <!-- LEGAL INFO BANNER -->
+    <div class="legal-banner">
+        <div class="container">
+            <div class="legal-badge">
+                <i class="fas fa-info-circle"></i>
+                <span>Yeni Düzenleme: Tüketici Bilgilendirmesi Zorunludur</span>
+            </div>
+            <div class="legal-badge">
+                <i class="fas fa-wheat-awn"></i>
+                <span>Alerjen Bilgisi</span>
+            </div>
+            <div class="legal-badge">
+                <i class="fas fa-list"></i>
+                <span>İçerik Bilgisi</span>
+            </div>
+            <div class="legal-badge">
+                <i class="fas fa-fire"></i>
+                <span>Kalori Bilgisi</span>
+            </div>
+        </div>
+    </div>
 
     <!-- 3 CARDS SECTION -->
     <section class="cards-section" id="kartlar">
@@ -1404,13 +1621,36 @@
         </div>
     </section>
 
+    <!-- QR CODE INFO SECTION -->
+    <section class="menu-section">
+        <div class="container">
+            <div class="qr-section reveal">
+                <h3><i class="fas fa-qrcode"></i> Ürün Bilgilerine QR Kod ile Ulaşın</h3>
+                <div class="qr-content">
+                    </div>
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://goldoner.duckdns.org/" alt="QR Kod">
+                    </div>
+                    <div class="qr-info">
+                        <p>Tarım ve Orman Bakanlığı'nın yeni düzenlemesi kapsamında, tüm ürünlerimizin detaylı besin değerleri, alerjen bilgileri ve içerik bilgilerine QR kodumuzu okutarak ulaşabilirsiniz.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Detaylı alerjen bilgileri</li>
+                            <li><i class="fas fa-check-circle"></i> İçerik ve bileşen bilgileri</li>
+                            <li><i class="fas fa-check-circle"></i> Kalori ve besin değerleri</li>
+                            <li><i class="fas fa-check-circle"></i> Anlık güncel bilgiler</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- MENU SECTION -->
     <section class="menu-section" id="menu">
         <div class="container">
             <div class="section-title reveal">
                 <h2>Menümüz</h2>
                 <div class="line"></div>
-                <p>En sevilen lezzetlerimizi keşfedin</p>
+                <p>En sevilen lezzetlerimizi keşfedin - Alerjen ve kalori bilgileri ile</p>
             </div>
 
             <div class="menu-tabs reveal">
@@ -1421,280 +1661,778 @@
                 <button class="menu-tab" onclick="switchTab('icecek', this)">🥤 İçecekler</button>
             </div>
 
-            <!-- KOKOREÇ (YENİ) -->
+            <!-- KOKOREÇ -->
             <div class="menu-category active" id="kokorec">
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZJQhmUeZNUOYy15FP8BmkNeVS2ApfUoSyIg_51-DCSenEQ6ND9h1s2us&s=10" alt="Kokoreç">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZJQhmUeZNUOYy15FP8BmkNeVS2ApfUoSyIg_51-DCSenEQ6ND9h1s2us&s=10" alt="Kokoreç">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Kokoreç</h4>
+                            <p>Özel baharatlarla hazırlanan geleneksel kokoreç</p>
+                            <div class="allergen-tags">
+                                <span class="allergen-tag gluten"><i class="fas fa-exclamation-circle"></i> Gluten</span>
+                            </div>
+                        </div>
+                        <span class="menu-item-price">400 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Kokoreç</h4>
-                        <p>Özel baharatlarla hazırlanan geleneksel kokoreç</p>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 650 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Koyun bağırsağı, iç yağ, kekik, pul biber, tuz, karabiber</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Gluten (ekmek)</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">400 TL</span>
                 </div>
             </div>
 
             <!-- TAVUK DONER -->
             <div class="menu-category" id="tavuk-doner">
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKrNxX2q5TpZ3uOunaUW_b0ga9EquffP_nNwY6Ypb2MQ&s=10" alt="Ekmek Arası Tavuk Döner">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKrNxX2q5TpZ3uOunaUW_b0ga9EquffP_nNwY6Ypb2MQ&s=10" alt="Ekmek Arası Tavuk Döner">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Ekmek Arası Tavuk Döner</h4>
+                            <p>Taze ekmek arasında bol malzemeli</p>
+                            <div class="allergen-tags">
+                                <span class="allergen-tag gluten"><i class="fas fa-exclamation-circle"></i> Gluten</span>
+                                <span class="allergen-tag dairy"><i class="fas fa-exclamation-circle"></i> Süt</span>
+                            </div>
+                        </div>
+                        <span class="menu-item-price">120 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Ekmek Arası Tavuk Döner</h4>
-                        <p>Taze ekmek arasında bol malzemeli</p>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 450 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Tavuk eti, ekmek, domates, marul, soğan, yoğurt, tereyağı</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Gluten (ekmek), Süt (yoğurt, tereyağı)</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">120 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRNkq4QJ1tP-veLzktnWZJwXnuOuZFvJNi0Va2zxYyOw&s=10" alt="Hatay Usülü Tavuk Döner">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRNkq4QJ1tP-veLzktnWZJwXnuOuZFvJNi0Va2zxYyOw&s=10" alt="Hatay Usülü Tavuk Döner">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Hatay Usülü Tavuk Döner (Lavaş)</h4>
+                            <p>Hatay usülü, lavaş içinde</p>
+                            <div class="allergen-tags">
+                                <span class="allergen-tag gluten"><i class="fas fa-exclamation-circle"></i> Gluten</span>
+                            </div>
+                        </div>
+                        <span class="menu-item-price">150 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Hatay Usülü Tavuk Döner (Lavaş)</h4>
-                        <p>Hatay usülü, lavaş içinde</p>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 520 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Tavuk eti, lavaş, domates, soğan, maydanoz, sumak, acı sos</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Gluten (lavaş)</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">150 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRijAjCyaSNXdt8Gvf-TXK8Nd9BBL3uGuRg53t4O4LgzA&s=10" alt="Lavaşta Tavuk Döner">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRijAjCyaSNXdt8Gvf-TXK8Nd9BBL3uGuRg53t4O4LgzA&s=10" alt="Lavaşta Tavuk Döner">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Lavaşta Tavuk Döner</h4>
+                            <p>İnce lavaş içinde tavuk döner</p>
+                            <div class="allergen-tags">
+                                <span class="allergen-tag gluten"><i class="fas fa-exclamation-circle"></i> Gluten</span>
+                                <span class="allergen-tag dairy"><i class="fas fa-exclamation-circle"></i> Süt</span>
+                            </div>
+                        </div>
+                        <span class="menu-item-price">150 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Lavaşta Tavuk Döner</h4>
-                        <p>İnce lavaş içinde tavuk döner</p>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 480 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Tavuk eti, lavaş, domates, marul, yoğurt, tereyağı</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Gluten (lavaş), Süt (yoğurt)</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">150 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://cdn.getiryemek.com/restaurants/1760599437636_1125x522.webp" alt="Patso">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://cdn.getiryemek.com/restaurants/1760599437636_1125x522.webp" alt="Patso">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Patso</h4>
+                            <p>Çıtır patates ile birlikte</p>
+                            <div class="allergen-tags">
+                                <span class="allergen-tag gluten"><i class="fas fa-exclamation-circle"></i> Gluten</span>
+                                <span class="allergen-tag dairy"><i class="fas fa-exclamation-circle"></i> Süt</span>
+                            </div>
+                        </div>
+                        <span class="menu-item-price">100 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Patso</h4>
-                        <p>Çıtır patates ile birlikte</p>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 580 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Tavuk döner, patates kızartması, ekmek, kaşar peyniri, domates</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Gluten (ekmek), Süt (kaşar)</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">100 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://images.deliveryhero.io/image/fd-tr/LH/e9e8-listing.jpg" alt="Izgara Köfte">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://images.deliveryhero.io/image/fd-tr/LH/e9e8-listing.jpg" alt="Izgara Köfte Tavuk Döner">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Izgara Köfte Tavuk Döner</h4>
+                            <p>Izgara köfte ve tavuk bir arada</p>
+                            <div class="allergen-tags">
+                                <span class="allergen-tag gluten"><i class="fas fa-exclamation-circle"></i> Gluten</span>
+                                <span class="allergen-tag egg"><i class="fas fa-exclamation-circle"></i> Yumurta</span>
+                            </div>
+                        </div>
+                        <span class="menu-item-price">160 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Izgara Köfte Tavuk Döner</h4>
-                        <p>Izgara köfte ve tavuk bir arada</p>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 680 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Tavuk döner, ızgara köfte, ekmek, domates, marul, soğan</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Gluten (ekmek), Yumurta (köfte)</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">160 TL</span>
                 </div>
             </div>
 
             <!-- TOST -->
             <div class="menu-category" id="tost">
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt1CFv-e3xqP_Q1YvQKYkeI7RdzEDfzJnIk33rGMupPxFEVJg-LsMPeJj3&s=10" alt="Ayvalık Tostu">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt1CFv-e3xqP_Q1YvQKYkeI7RdzEDfzJnIk33rGMupPxFEVJg-LsMPeJj3&s=10" alt="Ayvalık Tostu">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Ayvalık Tostu</h4>
+                            <p>Ayvalık usulü tost</p>
+                            <div class="allergen-tags">
+                                <span class="allergen-tag gluten"><i class="fas fa-exclamation-circle"></i> Gluten</span>
+                                <span class="allergen-tag dairy"><i class="fas fa-exclamation-circle"></i> Süt</span>
+                            </div>
+                        </div>
+                        <span class="menu-item-price">100 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Ayvalık Tostu</h4>
-                        <p>Ayvalık usulü tost</p>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 420 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Ekmek, kaşar peyniri, sucuk, salam, domates, ketçap, mayonez</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Gluten (ekmek), Süt (kaşar)</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">100 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK5P9yfGkWGmvwUgD_HOvgXd-lJ8fGbIXz-YS_0jzWOxRnT2IowG6HWbc&s=10" alt="Sucuklu Tost">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK5P9yfGkWGmvwUgD_HOvgXd-lJ8fGbIXz-YS_0jzWOxRnT2IowG6HWbc&s=10" alt="Sucuklu Tost">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Sucuklu Tost</h4>
+                            <p>Bol sucuklu, kaşarlı tost</p>
+                            <div class="allergen-tags">
+                                <span class="allergen-tag gluten"><i class="fas fa-exclamation-circle"></i> Gluten</span>
+                                <span class="allergen-tag dairy"><i class="fas fa-exclamation-circle"></i> Süt</span>
+                            </div>
+                        </div>
+                        <span class="menu-item-price">90 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Sucuklu Tost</h4>
-                        <p>Bol sucuklu, kaşarlı tost</p>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 380 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Ekmek, sucuk, kaşar peyniri, domates, ketçap</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Gluten (ekmek), Süt (kaşar)</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">90 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzgy57x3SMoqxiFx6ZX5sOskKDIWEV0Q6BpZIi9jbiQg&s=10" alt="Kaşarlı Tost">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzgy57x3SMoqxiFx6ZX5sOskKDIWEV0Q6BpZIi9jbiQg&s=10" alt="Kaşarlı Tost">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Kaşarlı Tost</h4>
+                            <p>Eriyen kaşar peyniri ile</p>
+                            <div class="allergen-tags">
+                                <span class="allergen-tag gluten"><i class="fas fa-exclamation-circle"></i> Gluten</span>
+                                <span class="allergen-tag dairy"><i class="fas fa-exclamation-circle"></i> Süt</span>
+                            </div>
+                        </div>
+                        <span class="menu-item-price">90 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Kaşarlı Tost</h4>
-                        <p>Eriyen kaşar peyniri ile</p>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 350 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Ekmek, kaşar peyniri, tereyağı</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Gluten (ekmek), Süt (kaşar, tereyağı)</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">90 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://www.kozadoner.com/wp-content/uploads/2024/10/karisik.webp" alt="Karışık Tost">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://www.kozadoner.com/wp-content/uploads/2024/10/karisik.webp" alt="Karışık Tost">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Karışık Tost</h4>
+                            <p>Bol malzemeli karışık tost</p>
+                            <div class="allergen-tags">
+                                <span class="allergen-tag gluten"><i class="fas fa-exclamation-circle"></i> Gluten</span>
+                                <span class="allergen-tag dairy"><i class="fas fa-exclamation-circle"></i> Süt</span>
+                            </div>
+                        </div>
+                        <span class="menu-item-price">100 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Karışık Tost</h4>
-                        <p>Bol malzemeli karışık tost</p>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 450 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Ekmek, kaşar, sucuk, salam, sosis, domates, ketçap, mayonez</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Gluten (ekmek), Süt (kaşar)</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">100 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=400&fit=crop" alt="Pizza Tost">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=400&fit=crop" alt="Pizza Tost">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Pizza Tost</h4>
+                            <p>Pizza tadında tost</p>
+                            <div class="allergen-tags">
+                                <span class="allergen-tag gluten"><i class="fas fa-exclamation-circle"></i> Gluten</span>
+                                <span class="allergen-tag dairy"><i class="fas fa-exclamation-circle"></i> Süt</span>
+                            </div>
+                        </div>
+                        <span class="menu-item-price">100 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Pizza Tost</h4>
-                        <p>Pizza tadında tost</p>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 400 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Ekmek, kaşar peyniri, sosis, mısır, ketçap, kekik</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Gluten (ekmek), Süt (kaşar)</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">100 TL</span>
                 </div>
             </div>
 
             <!-- DIGER -->
             <div class="menu-category" id="diger">
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkSVLATQpgSY8pjjBCretquXo2Uo_9PRGwfNPUm1QP6vUJ5rhpqOTD1MU&s=10" alt="Arnavut Ciğeri">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkSVLATQpgSY8pjjBCretquXo2Uo_9PRGwfNPUm1QP6vUJ5rhpqOTD1MU&s=10" alt="Arnavut Ciğeri">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Ekmek Arası Arnavut Ciğeri</h4>
+                            <p>Özel Arnavut ciğeri</p>
+                            <div class="allergen-tags">
+                                <span class="allergen-tag gluten"><i class="fas fa-exclamation-circle"></i> Gluten</span>
+                            </div>
+                        </div>
+                        <span class="menu-item-price">130 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Ekmek Arası Arnavut Ciğeri</h4>
-                        <p>Özel Arnavut ciğeri</p>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 380 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Dana ciğeri, ekmek, soğan, maydanoz, pul biber, kimyon</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Gluten (ekmek)</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">130 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://images.deliveryhero.io/image/fd-tr/LH/e9e8-listing.jpg" alt="Izgara Köfte">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://images.deliveryhero.io/image/fd-tr/LH/e9e8-listing.jpg" alt="Izgara Köfte">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Ekmek Arası Izgara Köfte</h4>
+                            <p>Özel ızgara köfte</p>
+                            <div class="allergen-tags">
+                                <span class="allergen-tag gluten"><i class="fas fa-exclamation-circle"></i> Gluten</span>
+                                <span class="allergen-tag egg"><i class="fas fa-exclamation-circle"></i> Yumurta</span>
+                            </div>
+                        </div>
+                        <span class="menu-item-price">150 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Ekmek Arası Izgara Köfte</h4>
-                        <p>Özel ızgara köfte</p>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 520 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Dana köfte, ekmek, domates, marul, soğan, piyaz</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Gluten (ekmek), Yumurta (köfte)</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">150 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://images.unsplash.com/photo-1639024471245-5128e0415a38?w=400&h=400&fit=crop" alt="Simit">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://images.unsplash.com/photo-1639024471245-5128e0415a38?w=400&h=400&fit=crop" alt="Simit">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Simit & Poğaça</h4>
+                            <p>Taze simit ve poğaça</p>
+                            <div class="allergen-tags">
+                                <span class="allergen-tag gluten"><i class="fas fa-exclamation-circle"></i> Gluten</span>
+                                <span class="allergen-tag sesame"><i class="fas fa-exclamation-circle"></i> Susam</span>
+                                <span class="allergen-tag dairy"><i class="fas fa-exclamation-circle"></i> Süt</span>
+                            </div>
+                        </div>
+                        <span class="menu-item-price">25 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Simit & Poğaça</h4>
-                        <p>Taze simit ve poğaça</p>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 280 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Un, susam, pekmez, tuz (simit) / Un, peynir, tereyağı (poğaça)</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Gluten, Susam, Süt</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">25 TL</span>
                 </div>
             </div>
 
             <!-- ICECEK -->
             <div class="menu-category" id="icecek">
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://vid.empower.net/t/10773/10773831-14430_640x360.jpg" alt="Sıcak Çikolata">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://vid.empower.net/t/10773/10773831-14430_640x360.jpg" alt="Sıcak Çikolata">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Sıcak Çikolata</h4>
+                            <div class="allergen-tags">
+                                <span class="allergen-tag dairy"><i class="fas fa-exclamation-circle"></i> Süt</span>
+                            </div>
+                        </div>
+                        <span class="menu-item-price">30 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Sıcak Çikolata</h4>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 180 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Süt, çikolata tozu, şeker, krema</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Süt</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">30 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=400&fit=crop" alt="Kahve">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=400&fit=crop" alt="Kahve">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Kahve Çeşitleri</h4>
+                        </div>
+                        <span class="menu-item-price">30 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Kahve Çeşitleri</h4>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 5-50 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Kahve çekirdeği, su (sade) / Süt, şeker (sütlü)</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Süt (sütlü kahvelerde)</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">30 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://ardenmarket.com.tr/media/catalog/product/cache/c29f40cd0751e4f0d02f666b30317d7d/b/e/beypazari-soda-200ml.jpg" alt="Soda">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://ardenmarket.com.tr/media/catalog/product/cache/c29f40cd0751e4f0d02f666b30317d7d/b/e/beypazari-soda-200ml.jpg" alt="Soda">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Soda Çeşitleri</h4>
+                        </div>
+                        <span class="menu-item-price">30 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Soda Çeşitleri</h4>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 0 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Madensuyu, karbondioksit</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Yok</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">30 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd1Xw2OzvTkatMnzXMhO-0OQFdNeqah-pmfsFQ55qCggBkksTXmnaWrhly&s=10" alt="Süt">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd1Xw2OzvTkatMnzXMhO-0OQFdNeqah-pmfsFQ55qCggBkksTXmnaWrhly&s=10" alt="Süt">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Süt Çeşitleri</h4>
+                            <div class="allergen-tags">
+                                <span class="allergen-tag dairy"><i class="fas fa-exclamation-circle"></i> Süt</span>
+                            </div>
+                        </div>
+                        <span class="menu-item-price">30 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Süt Çeşitleri</h4>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 120 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">İnek sütü</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Süt</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">30 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://istekirtasiye.com/media/8487/catalog/dimes-meyve-suyu-karisik-200-ml-27li-123261-13-K-8487.jpg" alt="Meyve Suyu">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://istekirtasiye.com/media/8487/catalog/dimes-meyve-suyu-karisik-200-ml-27li-123261-13-K-8487.jpg" alt="Meyve Suyu">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Meyve Suyu</h4>
+                        </div>
+                        <span class="menu-item-price">30 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Meyve Suyu</h4>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 90 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Meyve suyu konsantresi, su, şeker, C vitamini</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Yok</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">30 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://destinaotel.com/wp-content/uploads/2024/05/bitki-caylari.jpg" alt="Bitki Çayı">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://destinaotel.com/wp-content/uploads/2024/05/bitki-caylari.jpg" alt="Bitki Çayı">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Bitki Çayı</h4>
+                        </div>
+                        <span class="menu-item-price">25 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Bitki Çayı</h4>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 2 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Bitki çayı (Ihlamur, adaçayı, kuşburnu vb.)</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Yok</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">25 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=400&fit=crop" alt="Soğuk Çay">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=400&fit=crop" alt="Soğuk Çay">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Soğuk Çay</h4>
+                        </div>
+                        <span class="menu-item-price">30 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Soğuk Çay</h4>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 70 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Siyah çay, su, şeker, limon</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Yok</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">30 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-fOnLhT-ej8mmg3H9-nVbiO1u8XQ9zs0ZEOuyLUSh92O97c5nO45o2KEc&s=10" alt="Sahlep">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-fOnLhT-ej8mmg3H9-nVbiO1u8XQ9zs0ZEOuyLUSh92O97c5nO45o2KEc&s=10" alt="Sahlep">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Sahlep</h4>
+                            <div class="allergen-tags">
+                                <span class="allergen-tag dairy"><i class="fas fa-exclamation-circle"></i> Süt</span>
+                            </div>
+                        </div>
+                        <span class="menu-item-price">30 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Sahlep</h4>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 200 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Süt, sahlep tozu, şeker, tarçın</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Süt</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">30 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://platincdn.com/2919/pictures/YTWYLQSOQK10222021171324_nigde-gazozu-cam-200-ml-cf80.png" alt="Gazoz">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://platincdn.com/2919/pictures/YTWYLQSOQK10222021171324_nigde-gazozu-cam-200-ml-cf80.png" alt="Gazoz">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Gazoz</h4>
+                        </div>
+                        <span class="menu-item-price">60 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Gazoz</h4>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 140 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Su, şeker, karbondioksit, aroma verici</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Yok</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">60 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://static.ticimax.cloud/9247/uploads/urunresimleri/buyuk/ayran-032b56e5-6.jpg" alt="Ayran">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://static.ticimax.cloud/9247/uploads/urunresimleri/buyuk/ayran-032b56e5-6.jpg" alt="Ayran">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Ayran</h4>
+                            <div class="allergen-tags">
+                                <span class="allergen-tag dairy"><i class="fas fa-exclamation-circle"></i> Süt</span>
+                            </div>
+                        </div>
+                        <span class="menu-item-price">25 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Ayran</h4>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 60 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Yoğurt, su, tuz</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Süt</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">25 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROj86Kt7Fnp0ewHQkd61amzcn9HYDw35dCzMzmBNYchTFzrTg8AyENqlI&s=10" alt="Cola">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROj86Kt7Fnp0ewHQkd61amzcn9HYDw35dCzMzmBNYchTFzrTg8AyENqlI&s=10" alt="Cola">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Cola</h4>
+                        </div>
+                        <span class="menu-item-price">70 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Cola</h4>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 140 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Su, şeker, karbondioksit, kola özü, karamel, fosforik asit</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Yok</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">70 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://www.lav.com.tr/cdn/shop/files/LV-AJD315E-10.jpg?v=1772037169" alt="Çay">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://www.lav.com.tr/cdn/shop/files/LV-AJD315E-10.jpg?v=1772037169" alt="Çay">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Çay</h4>
+                        </div>
+                        <span class="menu-item-price">20 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Çay</h4>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 2 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Siyah çay, su</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Yok</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">20 TL</span>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-item-image">
-                        <img src="https://images.ofix.com/product-image/Erikli-Su-500-Ml-12-Li-Paket_RI23495FT1MF130547-orta.jpg?output=webp" alt="Su">
+                    <div class="menu-item-header">
+                        <div class="menu-item-image">
+                            <img src="https://images.ofix.com/product-image/Erikli-Su-500-Ml-12-Li-Paket_RI23495FT1MF130547-orta.jpg?output=webp" alt="Su">
+                        </div>
+                        <div class="menu-item-info">
+                            <h4>Su</h4>
+                        </div>
+                        <span class="menu-item-price">15 TL</span>
                     </div>
-                    <div class="menu-item-info">
-                        <h4>Su</h4>
+                    <div class="nutrition-info">
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-fire"></i> Enerji</span>
+                            <span class="nutrition-value"><span class="calorie-badge"><i class="fas fa-fire"></i> 0 kcal</span></span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-flask"></i> İçerik</span>
+                            <span class="nutrition-value">Doğal kaynak suyu</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span class="nutrition-label"><i class="fas fa-bread-slice"></i> Alerjenler</span>
+                            <span class="nutrition-value">Yok</span>
+                        </div>
                     </div>
-                    <span class="menu-item-price">15 TL</span>
                 </div>
             </div>
         </div>
@@ -1720,7 +2458,7 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p>"Keçiören Gece Kokoreççisi'nde yediğim en iyi kokoreçti! Et çok taze ve lezzetliydi. Kesinlikle tekrar geleceğim."</p>
+                    <p>"Keçiören Gece Kokoreççisi'nde yediğim en iyi kokoreçti! Et çok taze ve lezzetliydi. Alerjen bilgileri de çok net, gluten hassasiyetim var, güvenle yiyebiliyorum. Kesinlikle tekrar geleceğim."</p>
                     <div class="testimonial-author">
                         <div style="width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;color:var(--dark);font-weight:bold;">MY</div>
                         <div>
@@ -1738,7 +2476,7 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p>"Hatay usulü döner harikaydı! Porsiyonlar doyurucu, fiyatlar da çok uygun. Herkese tavsiye ederim."</p>
+                    <p>"Hatay usulü döner harikaydı! Porsiyonlar doyurucu, fiyatlar da çok uygun. Kalori bilgilerini görmek harika, diyet yapıyorum ve ne tükettiğimi bilmek çok önemli. Herkese tavsiye ederim."</p>
                     <div class="testimonial-author">
                         <div style="width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;color:var(--dark);font-weight:bold;">AK</div>
                         <div>
@@ -1756,7 +2494,7 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star-half-alt"></i>
                     </div>
-                    <p>"Ailece geliyoruz, çocuklar bayılıyor. Temiz, güvenilir ve lezzetli. Keçiören Gece Kokoreççisi bizim vazgeçilmezimiz!"</p>
+                    <p>"Ailece geliyoruz, çocuklar bayılıyor. Temiz, güvenilir ve lezzetli. Süt alerjisi olan oğlum için alerjen bilgilerini görmek çok değerli. Keçiören Gece Kokoreççisi bizim vazgeçilmezimiz!"</p>
                     <div class="testimonial-author">
                         <div style="width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;color:var(--dark);font-weight:bold;">AD</div>
                         <div>
@@ -1898,6 +2636,7 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 <span class="gold">Keçiören Gece Kokoreççisi</span>. Tüm hakları saklıdır. Lezzetle kalın! 🥙</p>
+                <p style="margin-top: 10px; font-size: 0.75rem;"><i class="fas fa-info-circle"></i> Tarım ve Orman Bakanlığı düzenlemesi kapsamında tüm ürünlerimizin alerjen, içerik ve kalori bilgileri yukarıda sunulmuştur.</p>
             </div>
         </div>
     </footer>
