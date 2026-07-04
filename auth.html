@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş / Kayıt - Keçiören Gece Kokoreççisi</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+        .auth-container {
+            background: #1e1e1e;
+            padding: 40px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid rgba(212, 160, 23, 0.2);
+        }
+        .auth-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            background: #2a2a2a;
+            border: none;
+            color: #aaa;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .auth-tab.active {
+            background: linear-gradient(135deg, #D4A017, #B8860B);
+            color: #111;
+            font-weight: 600;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            background: #2a2a2a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #D4A017;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #D4A017, #B8860B);
+            color: #111;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 160, 23, 0.3);
+        }
+        .error {
+            background: rgba(196, 30, 58, 0.1);
+            color: #C41E3A;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        .success {
+            background: rgba(37, 211, 102, 0.1);
+            color: #25D366;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        h2 {
+            text-align: center;
+            color: #D4A017;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <h2>🥙 Keçiören Gece Kokoreççisi</h2>
+        
+        <div class="auth-tabs">
+            <button class="auth-tab active" onclick="switchTab('login')">Giriş Yap</button>
+            <button class="auth-tab" onclick="switchTab('register')">Kayıt Ol</button>
+        </div>
+
+        <div id="error" class="error"></div>
+        <div id="success" class="success"></div>
+
+        <!-- Login Form -->
+        <form id="loginForm">
+            <div class="form-group">
+                <input type="email" id="loginEmail" placeholder="E-posta" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="loginPassword" placeholder="Şifre" required>
+            </div>
+            <button type="submit" class="btn-submit">Giriş Yap</button>
+        </form>
+
+        <!-- Register Form -->
+        <form id="registerForm" style="display:none;">
+            <div class="form-group">
+                <input type="text" id="registerName" placeholder="Ad Soyad" required>
+            </div>
+            <div class="form-group">
+                <input type="email" id="registerEmail" placeholder="E-posta" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="registerPassword" placeholder="Şifre (min 6 karakter)" required>
+            </div>
+            <button type="submit" class="btn-submit">Kayıt Ol</button>
+        </form>
+    </div>
+
+    <script type="module">
+        import { auth } from './firebase.js';
+        import { 
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { db } from './firebase.js';
+        import { setDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        window.switchTab = function(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (tab === 'login') {
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('registerForm').style.display = 'none';
+            } else {
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('registerForm').style.display = 'block';
+            }
+            
+            hideMessages();
+        }
+
+        function showError(msg) {
+            const error = document.getElementById('error');
+            error.textContent = msg;
+            error.style.display = 'block';
+            setTimeout(() => error.style.display = 'none', 5000);
+        }
+
+        function showSuccess(msg) {
+            const success = document.getElementById('success');
+            success.textContent = msg;
+            success.style.display = 'block';
+            setTimeout(() => success.style.display = 'none', 5000);
+        }
+
+        function hideMessages() {
+            document.getElementById('error').style.display = 'none';
+            document.getElementById('success').style.display = 'none';
+        }
+
+        // Login
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                showSuccess('Giriş başarılı! Yönlendiriliyorsunuz...');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            } catch (error) {
+                showError('Giriş başarısız: ' + error.message);
+            }
+        });
+
+        // Register
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+
+            if (password.length < 6) {
+                showError('Şifre en az 6 karakter olmalı!');
+                return;
+            }
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                
+                // Kullanıcı bilgilerini Firestore'a kaydet
+                await setDoc(doc(db, "users", userCredential.user.uid), {
+                    name: name,
+                    email: email,
+                    role: "user", // Varsayılan rol
+                    createdAt: new Date().toISOString()
+                });
+
+                showSuccess('Kayıt başarılı! Giriş sayfasına yönlendiriliyorsunuz...');
+                setTimeout(() => {
+                    switchTab('login');
+                }, 1500);
+            } catch (error) {
+                showError('Kayıt başarısız: ' + error.message);
+            }
+        });
+
+        // Sayfa yüklendiğinde kontrol et
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>
