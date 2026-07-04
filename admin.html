@@ -542,5 +542,1453 @@ document.getElementById('productImage').addEventListener('change', async (e) => 
             }
         }
     </script>
+    <!-- ============ FIREBASE ADMIN PANELİ BAŞLANGIÇ ============ -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+<style>
+  .admin-toggle-btn {
+    position: fixed;
+    bottom: 100px;      /* Scroll butonunun üstünde */
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1001;      /* Scroll butonundan (999) yüksek */
+    box-shadow: 0 5px 25px rgba(37, 99, 235, 0.5);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.admin-toggle-btn:hover {
+    transform: scale(1.1) rotate(90deg);
+}
+
+    .admin-toggle-btn:hover {
+        transform: scale(1.1) rotate(90deg);
+    }
+
+    .admin-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(10px);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .admin-modal-overlay.active {
+        display: flex;
+    }
+
+    .admin-modal {
+        background: #1e1e1e;
+        border-radius: 20px;
+        max-width: 900px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        border: 2px solid rgba(212, 160, 23, 0.3);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    .admin-modal-header {
+        padding: 25px 30px;
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        border-radius: 20px 20px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .admin-modal-header h2 {
+        color: white;
+        font-size: 1.5rem;
+        font-family: 'Poppins', sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .admin-close-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .admin-close-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: rotate(90deg);
+    }
+
+    .admin-modal-body {
+        padding: 30px;
+    }
+
+    .admin-category {
+        background: #111;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid rgba(212, 160, 23, 0.15);
+    }
+
+    .admin-category-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(212, 160, 23, 0.2);
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .admin-category-name {
+        color: #D4A017;
+        font-size: 1.3rem;
+        font-weight: 700;
+        font-family: 'Playfair Display', serif;
+    }
+
+    .admin-btn-group {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .admin-edit-category-btn,
+    .admin-delete-category-btn,
+    .admin-add-product-btn {
+        border: none;
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-weight: 600;
+    }
+
+    .admin-edit-category-btn {
+        background: rgba(212, 160, 23, 0.15);
+        border: 1px solid rgba(212, 160, 23, 0.3);
+        color: #D4A017;
+    }
+
+    .admin-edit-category-btn:hover {
+        background: #D4A017;
+        color: #111;
+    }
+
+    .admin-delete-category-btn {
+        background: rgba(239, 68, 68, 0.15);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        color: #ef4444;
+    }
+
+    .admin-delete-category-btn:hover {
+        background: #ef4444;
+        color: white;
+    }
+
+    .admin-add-product-btn {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        margin-top: 10px;
+    }
+
+    .admin-add-product-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+    }
+
+    .admin-product-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        background: #1a1a1a;
+        padding: 12px 15px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease;
+        flex-wrap: wrap;
+    }
+
+    .admin-product-item:hover {
+        border-color: rgba(212, 160, 23, 0.3);
+        transform: translateX(3px);
+    }
+
+    .admin-product-img {
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        object-fit: cover;
+        border: 2px solid #D4A017;
+    }
+
+    .admin-product-info {
+        flex: 1;
+        min-width: 150px;
+    }
+
+    .admin-product-info h4 {
+        color: white;
+        font-size: 0.95rem;
+        font-family: 'Poppins', sans-serif;
+        margin-bottom: 3px;
+    }
+
+    .admin-product-info p {
+        color: #D4A017;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .admin-product-actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .admin-edit-product-btn,
+    .admin-delete-product-btn {
+        border: none;
+        color: white;
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 600;
+    }
+
+    .admin-edit-product-btn {
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+    }
+
+    .admin-edit-product-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+    }
+
+    .admin-delete-product-btn {
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+    }
+
+    .admin-delete-product-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+    }
+
+    .admin-add-category-btn {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #10b981, #059669);
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .admin-add-category-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+    }
+
+    .edit-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .edit-modal-overlay.active {
+        display: flex;
+    }
+
+    .edit-modal {
+        background: #1e1e1e;
+        border-radius: 20px;
+        max-width: 500px;
+        width: 100%;
+        border: 2px solid rgba(37, 99, 235, 0.5);
+        overflow: hidden;
+    }
+
+    .edit-modal-header {
+        padding: 20px 25px;
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .edit-modal-header h3 {
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.2rem;
+    }
+
+    .edit-modal-body {
+        padding: 25px;
+    }
+
+    .edit-form-group {
+        margin-bottom: 18px;
+    }
+
+    .edit-form-group label {
+        display: block;
+        color: #D4A017;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .edit-form-group input {
+        width: 100%;
+        padding: 12px 15px;
+        background: #111;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.95rem;
+        transition: border-color 0.3s ease;
+    }
+
+    .edit-form-group input:focus {
+        outline: none;
+        border-color: #2563eb;
+    }
+
+    .edit-modal-footer {
+        padding: 0 25px 25px;
+        display: flex;
+        gap: 10px;
+    }
+
+    .edit-save-btn {
+        flex: 1;
+        padding: 12px;
+        background: linear-gradient(135deg, #10b981, #059669);
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+        transition: all 0.3s ease;
+    }
+
+    .edit-save-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+    }
+
+    .edit-cancel-btn {
+        flex: 1;
+        padding: 12px;
+        background: #333;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+        transition: all 0.3s ease;
+    }
+
+    .edit-cancel-btn:hover {
+        background: #444;
+    }
+
+    .admin-success-msg {
+        position: fixed;
+        top: 30px;
+        right: 30px;
+        padding: 15px 25px;
+        border-radius: 12px;
+        font-weight: 600;
+        z-index: 99999;
+        display: none;
+        animation: slideIn 0.4s ease;
+    }
+
+    .admin-success-msg.success {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+    }
+
+    .admin-success-msg.error {
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+        color: white;
+        box-shadow: 0 10px 30px rgba(239, 68, 68, 0.4);
+    }
+
+    @keyframes slideIn {
+        from { transform: translateX(400px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+
+    .login-modal {
+        background: #1e1e1e;
+        border-radius: 20px;
+        max-width: 400px;
+        width: 100%;
+        border: 2px solid rgba(37, 99, 235, 0.5);
+        overflow: hidden;
+    }
+
+    .login-modal-header {
+        padding: 30px;
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        text-align: center;
+    }
+
+    .login-modal-header i {
+        font-size: 3rem;
+        color: white;
+        margin-bottom: 15px;
+    }
+
+    .login-modal-header h3 {
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.5rem;
+    }
+
+    .login-modal-body {
+        padding: 30px;
+    }
+
+    .login-form-group {
+        margin-bottom: 20px;
+    }
+
+    .login-form-group label {
+        display: block;
+        color: #D4A017;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .login-form-group input {
+        width: 100%;
+        padding: 12px 15px;
+        background: #111;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.95rem;
+        transition: border-color 0.3s ease;
+    }
+
+    .login-form-group input:focus {
+        outline: none;
+        border-color: #2563eb;
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .login-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
+    }
+
+    .admin-loading {
+        text-align: center;
+        padding: 40px;
+        color: #D4A017;
+        font-size: 1.1rem;
+    }
+
+    .admin-loading i {
+        font-size: 2rem;
+        animation: spin 1.5s linear infinite;
+        margin-bottom: 15px;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 600px) {
+        .admin-modal-body { padding: 15px; }
+        .admin-product-item { flex-direction: column; align-items: flex-start; }
+        .admin-product-img { width: 40px; height: 40px; }
+        .admin-product-actions { width: 100%; justify-content: flex-end; }
+    }
+</style>
+
+<!-- Admin Panel Butonu -->
+<button class="admin-toggle-btn" onclick="openLoginModal()" title="Admin Paneli">
+    <i class="fas fa-cog"></i>
+</button>
+
+<!-- Login Modal -->
+<div class="admin-modal-overlay" id="loginModal">
+    <div class="login-modal">
+        <div class="login-modal-header">
+            <i class="fas fa-lock"></i>
+            <h3>Admin Girişi</h3>
+        </div>
+        <div class="login-modal-body">
+            <div class="login-form-group">
+                <label>Şifre</label>
+                <input type="password" id="adminPassword" placeholder="Şifrenizi girin" onkeypress="if(event.key==='Enter')loginAdmin()">
+            </div>
+            <button class="login-btn" onclick="loginAdmin()">
+                <i class="fas fa-sign-in-alt"></i> Giriş Yap
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Ana Admin Modal -->
+<div class="admin-modal-overlay" id="adminModal">
+    <div class="admin-modal">
+        <div class="admin-modal-header">
+            <h2><i class="fas fa-tools"></i> Admin Paneli</h2>
+            <div style="display:flex;gap:10px;">
+                <button class="admin-close-btn" onclick="logoutAdmin()" title="Çıkış Yap">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+                <button class="admin-close-btn" onclick="closeAdminPanel()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="admin-modal-body" id="adminModalBody">
+            <div class="admin-loading">
+                <i class="fas fa-spinner"></i>
+                <p>Yükleniyor...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ürün/Kategori Düzenleme Modalı -->
+<div class="edit-modal-overlay" id="editModal">
+    <div class="edit-modal">
+        <div class="edit-modal-header">
+            <h3 id="editModalTitle">Düzenle</h3>
+            <button class="admin-close-btn" onclick="closeEditModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="edit-modal-body" id="editModalBody">
+        </div>
+        <div class="edit-modal-footer">
+            <button class="edit-cancel-btn" onclick="closeEditModal()">İptal</button>
+            <button class="edit-save-btn" id="editSaveBtn" onclick="saveEdit()"><i class="fas fa-save"></i> Kaydet</button>
+        </div>
+    </div>
+</div>
+
+<!-- Başarı/Hata Mesajı -->
+<div class="admin-success-msg" id="adminSuccessMsg">
+    <i class="fas fa-check-circle"></i> <span id="adminMsgText">Kaydedildi!</span>
+</div>
+<!-- ============ FIRESTORE ADMIN PANELİ BAŞLANGIÇ ============ -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+<style>
+    .admin-toggle-btn {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 1001;
+        box-shadow: 0 5px 25px rgba(37, 99, 235, 0.5);
+        border: none;
+        transition: all 0.3s ease;
+    }
+    .admin-toggle-btn:hover { transform: scale(1.1) rotate(90deg); }
+
+    .admin-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(10px);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+    .admin-modal-overlay.active { display: flex; }
+
+    .admin-modal {
+        background: #1e1e1e;
+        border-radius: 20px;
+        max-width: 900px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        border: 2px solid rgba(212, 160, 23, 0.3);
+    }
+
+    .admin-modal-header {
+        padding: 25px 30px;
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        border-radius: 20px 20px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+    .admin-modal-header h2 {
+        color: white;
+        font-size: 1.5rem;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .admin-close-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .admin-close-btn:hover { background: rgba(255, 255, 255, 0.3); transform: rotate(90deg); }
+
+    .admin-modal-body { padding: 30px; }
+
+    .admin-category {
+        background: #111;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid rgba(212, 160, 23, 0.15);
+    }
+
+    .admin-category-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(212, 160, 23, 0.2);
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .admin-category-name {
+        color: #D4A017;
+        font-size: 1.3rem;
+        font-weight: 700;
+        font-family: 'Playfair Display', serif;
+    }
+
+    .admin-btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .admin-edit-category-btn,
+    .admin-delete-category-btn,
+    .admin-add-product-btn {
+        border: none;
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-weight: 600;
+    }
+    .admin-edit-category-btn {
+        background: rgba(212, 160, 23, 0.15);
+        border: 1px solid rgba(212, 160, 23, 0.3);
+        color: #D4A017;
+    }
+    .admin-edit-category-btn:hover { background: #D4A017; color: #111; }
+    .admin-delete-category-btn {
+        background: rgba(239, 68, 68, 0.15);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        color: #ef4444;
+    }
+    .admin-delete-category-btn:hover { background: #ef4444; color: white; }
+    .admin-add-product-btn {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        margin-top: 10px;
+    }
+    .admin-add-product-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+    }
+
+    .admin-product-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        background: #1a1a1a;
+        padding: 12px 15px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease;
+        flex-wrap: wrap;
+    }
+    .admin-product-item:hover {
+        border-color: rgba(212, 160, 23, 0.3);
+        transform: translateX(3px);
+    }
+    .admin-product-img {
+        width: 50px; height: 50px;
+        border-radius: 8px;
+        object-fit: cover;
+        border: 2px solid #D4A017;
+    }
+    .admin-product-info { flex: 1; min-width: 150px; }
+    .admin-product-info h4 {
+        color: white;
+        font-size: 0.95rem;
+        font-family: 'Poppins', sans-serif;
+        margin-bottom: 3px;
+    }
+    .admin-product-info p { color: #D4A017; font-size: 0.85rem; font-weight: 600; }
+    .admin-product-actions { display: flex; gap: 8px; }
+
+    .admin-edit-product-btn,
+    .admin-delete-product-btn {
+        border: none;
+        color: white;
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 600;
+    }
+    .admin-edit-product-btn { background: linear-gradient(135deg, #2563eb, #1e40af); }
+    .admin-edit-product-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+    }
+    .admin-delete-product-btn { background: linear-gradient(135deg, #ef4444, #dc2626); }
+    .admin-delete-product-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+    }
+
+    .admin-add-category-btn {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #10b981, #059669);
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    .admin-add-category-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+    }
+
+    .edit-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+    .edit-modal-overlay.active { display: flex; }
+
+    .edit-modal {
+        background: #1e1e1e;
+        border-radius: 20px;
+        max-width: 500px;
+        width: 100%;
+        border: 2px solid rgba(37, 99, 235, 0.5);
+        overflow: hidden;
+    }
+    .edit-modal-header {
+        padding: 20px 25px;
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .edit-modal-header h3 { color: white; font-family: 'Poppins', sans-serif; font-size: 1.2rem; }
+    .edit-modal-body { padding: 25px; }
+    .edit-form-group { margin-bottom: 18px; }
+    .edit-form-group label {
+        display: block;
+        color: #D4A017;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    .edit-form-group input {
+        width: 100%;
+        padding: 12px 15px;
+        background: #111;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.95rem;
+        transition: border-color 0.3s ease;
+    }
+    .edit-form-group input:focus { outline: none; border-color: #2563eb; }
+    .edit-modal-footer { padding: 0 25px 25px; display: flex; gap: 10px; }
+    .edit-save-btn {
+        flex: 1;
+        padding: 12px;
+        background: linear-gradient(135deg, #10b981, #059669);
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+    }
+    .edit-save-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+    }
+    .edit-cancel-btn {
+        flex: 1;
+        padding: 12px;
+        background: #333;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+    }
+    .edit-cancel-btn:hover { background: #444; }
+
+    .admin-success-msg {
+        position: fixed;
+        top: 30px; right: 30px;
+        padding: 15px 25px;
+        border-radius: 12px;
+        font-weight: 600;
+        z-index: 99999;
+        display: none;
+        animation: slideIn 0.4s ease;
+    }
+    .admin-success-msg.success {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+    }
+    .admin-success-msg.error {
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+        color: white;
+    }
+    @keyframes slideIn {
+        from { transform: translateX(400px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+
+    .login-modal {
+        background: #1e1e1e;
+        border-radius: 20px;
+        max-width: 400px;
+        width: 100%;
+        border: 2px solid rgba(37, 99, 235, 0.5);
+        overflow: hidden;
+    }
+    .login-modal-header {
+        padding: 30px;
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        text-align: center;
+    }
+    .login-modal-header i { font-size: 3rem; color: white; margin-bottom: 15px; }
+    .login-modal-header h3 { color: white; font-family: 'Poppins', sans-serif; font-size: 1.5rem; }
+    .login-modal-body { padding: 30px; }
+    .login-form-group { margin-bottom: 20px; }
+    .login-form-group label {
+        display: block;
+        color: #D4A017;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    .login-form-group input {
+        width: 100%;
+        padding: 12px 15px;
+        background: #111;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.95rem;
+    }
+    .login-form-group input:focus { outline: none; border-color: #2563eb; }
+    .login-btn {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+    }
+    .login-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
+    }
+
+    .admin-loading { text-align: center; padding: 40px; color: #D4A017; font-size: 1.1rem; }
+    .admin-loading i { font-size: 2rem; animation: spin 1.5s linear infinite; margin-bottom: 15px; }
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 600px) {
+        .admin-modal-body { padding: 15px; }
+        .admin-product-item { flex-direction: column; align-items: flex-start; }
+        .admin-product-img { width: 40px; height: 40px; }
+        .admin-product-actions { width: 100%; justify-content: flex-end; }
+    }
+</style>
+
+<!-- Admin Butonu -->
+<button class="admin-toggle-btn" onclick="openLoginModal()" title="Admin Paneli">
+    <i class="fas fa-cog"></i>
+</button>
+
+<!-- Login Modal -->
+<div class="admin-modal-overlay" id="loginModal">
+    <div class="login-modal">
+        <div class="login-modal-header">
+            <i class="fas fa-lock"></i>
+            <h3>Admin Girişi</h3>
+        </div>
+        <div class="login-modal-body">
+            <div class="login-form-group">
+                <label>Şifre</label>
+                <input type="password" id="adminPassword" placeholder="Şifrenizi girin" onkeypress="if(event.key==='Enter')loginAdmin()">
+            </div>
+            <button class="login-btn" onclick="loginAdmin()">
+                <i class="fas fa-sign-in-alt"></i> Giriş Yap
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Admin Modal -->
+<div class="admin-modal-overlay" id="adminModal">
+    <div class="admin-modal">
+        <div class="admin-modal-header">
+            <h2><i class="fas fa-tools"></i> Admin Paneli</h2>
+            <div style="display:flex;gap:10px;">
+                <button class="admin-close-btn" onclick="logoutAdmin()" title="Çıkış">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+                <button class="admin-close-btn" onclick="closeAdminPanel()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="admin-modal-body" id="adminModalBody">
+            <div class="admin-loading">
+                <i class="fas fa-spinner"></i>
+                <p>Yükleniyor...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="edit-modal-overlay" id="editModal">
+    <div class="edit-modal">
+        <div class="edit-modal-header">
+            <h3 id="editModalTitle">Düzenle</h3>
+            <button class="admin-close-btn" onclick="closeEditModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="edit-modal-body" id="editModalBody"></div>
+        <div class="edit-modal-footer">
+            <button class="edit-cancel-btn" onclick="closeEditModal()">İptal</button>
+            <button class="edit-save-btn" id="editSaveBtn" onclick="saveEdit()">
+                <i class="fas fa-save"></i> Kaydet
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Mesaj -->
+<div class="admin-success-msg" id="adminSuccessMsg">
+    <i class="fas fa-check-circle"></i> <span id="adminMsgText">Kaydedildi!</span>
+</div>
+
+<script>
+    // ============ FIREBASE YAPILANDIRMASI ============
+    const firebaseConfig = {
+        apiKey: "AIzaSyC5iB_kvS8z0truk90ir6vDatIskewz0mU",
+        authDomain: "goldoner-6682a.firebaseapp.com",
+        databaseURL: "https://goldoner-6682a-default-rtdb.firebaseio.com",
+        projectId: "goldoner-6682a",
+        storageBucket: "goldoner-6682a.firebasestorage.app",
+        messagingSenderId: "397837198552",
+        appId: "1:397837198552:web:bc83c9f482242d588f63ad",
+        measurementId: "G-QFYWkW8X22"
+    };
+
+    const ADMIN_PASSWORD = "Soner5877";
+    let isAdminLoggedIn = false;
+    let currentEditType = '';
+    let currentEditData = {};
+
+    // Firestore başlat
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const categoriesRef = db.collection('categories');
+    const productsRef = db.collection('products');
+
+    // ============ LOGIN ============
+    function openLoginModal() {
+        if (isAdminLoggedIn) {
+            openAdminPanel();
+        } else {
+            document.getElementById('loginModal').classList.add('active');
+            document.getElementById('adminPassword').focus();
+        }
+    }
+
+    function loginAdmin() {
+        const password = document.getElementById('adminPassword').value;
+        if (password === ADMIN_PASSWORD) {
+            isAdminLoggedIn = true;
+            document.getElementById('loginModal').classList.remove('active');
+            document.getElementById('adminPassword').value = '';
+            openAdminPanel();
+            showMessage('Giriş başarılı!', 'success');
+        } else {
+            showMessage('Hatalı şifre!', 'error');
+        }
+    }
+
+    function logoutAdmin() {
+        isAdminLoggedIn = false;
+        closeAdminPanel();
+        showMessage('Çıkış yapıldı', 'success');
+    }
+
+    // ============ ADMIN PANEL ============
+    function openAdminPanel() {
+        document.getElementById('adminModal').classList.add('active');
+        loadAdminData();
+    }
+
+    function closeAdminPanel() {
+        document.getElementById('adminModal').classList.remove('active');
+    }
+
+    async function loadAdminData() {
+        const body = document.getElementById('adminModalBody');
+        body.innerHTML = '<div class="admin-loading"><i class="fas fa-spinner"></i><p>Yükleniyor...</p></div>';
+
+        try {
+                    // DEBUG: Tüm ürünleri kontrol et
+        const allProducts = await productsRef.get();
+        console.log('Toplam ürün sayısı:', allProducts.size);
+        allProducts.forEach(doc => {
+            console.log('Ürün:', doc.id, doc.data());
+        });
+            const categoriesSnapshot = await categoriesRef.get();
+
+            if (categoriesSnapshot.empty) {
+                body.innerHTML = '<p style="text-align:center;color:#D4A017;padding:40px;">Henüz kategori yok. Yeni kategori ekleyin!</p>';
+                renderAddCategoryButton(body);
+                return;
+            }
+            let html = '';
+
+            for (const categoryDoc of categoriesSnapshot.docs) {
+                const category = categoryDoc.data();
+                const categoryId = categoryDoc.id;
+
+                html += `
+                    <div class="admin-category">
+                        <div class="admin-category-header">
+                            <span class="admin-category-name">${category.name || categoryId}</span>
+                            <div class="admin-btn-group">
+                                <button class="admin-edit-category-btn" onclick="editCategory('${categoryId}')">
+                                    <i class="fas fa-edit"></i> Düzenle
+                                </button>
+                                <button class="admin-delete-category-btn" onclick="deleteCategory('${categoryId}')">
+                                    <i class="fas fa-trash"></i> Sil
+                                </button>
+                            </div>
+                        </div>
+                `;
+
+                // Tüm ürünleri çek
+const productsSnapshot = await productsRef.get();
+
+                if (productsSnapshot.empty) {
+                    html += '<p style="color:#888;padding:10px;">Bu kategoride ürün yok</p>';
+                } else {
+                    for (const productDoc of productsSnapshot.docs) {
+    const product = productDoc.data();
+    const productId = productDoc.id;
+    
+    // category yoksa veya farklıysa atla
+if (product.category !== categoryId) continue;
+
+                        html += `
+                            <div class="admin-product-item">
+                                <img src="${product.image || 'https://via.placeholder.com/50?text=No+Image'}" alt="${product.name}" class="admin-product-img" onerror="this.src='https://via.placeholder.com/50?text=No+Image'">
+                                <div class="admin-product-info">
+                                    <h4>${product.name}</h4>
+                                    <p>${product.price || '—'} ${product.calories ? '• ' + product.calories : ''}</p>
+                                </div>
+                                <div class="admin-product-actions">
+                                    <button class="admin-edit-product-btn" onclick="editProduct('${categoryId}', '${productId}')">
+                                        <i class="fas fa-edit"></i> Düzenle
+                                    </button>
+                                    <button class="admin-delete-product-btn" onclick="deleteProduct('${categoryId}', '${productId}')">
+                                        <i class="fas fa-trash"></i> Sil
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+
+                html += `
+                        <button class="admin-add-product-btn" onclick="addProduct('${categoryId}')">
+                            <i class="fas fa-plus"></i> Ürün Ekle
+                        </button>
+                    </div>
+                `;
+            }
+
+            body.innerHTML = html;
+            renderAddCategoryButton(body);
+
+        } catch (error) {
+            console.error('Hata:', error);
+            body.innerHTML = '<p style="text-align:center;color:#ef4444;padding:40px;">Hata: ' + error.message + '</p>';
+        }
+    }
+
+    function renderAddCategoryButton(container) {
+        container.innerHTML += `
+            <button class="admin-add-category-btn" onclick="addCategory()">
+                <i class="fas fa-plus-circle"></i> Yeni Kategori Ekle
+            </button>
+        `;
+    }
+
+    // ============ KATEGORİ İŞLEMLERİ ============
+    function addCategory() {
+        currentEditType = 'addCategory';
+        document.getElementById('editModalTitle').textContent = 'Yeni Kategori Ekle';
+        document.getElementById('editModalBody').innerHTML = `
+            <div class="edit-form-group">
+                <label>Kategori Adı (emoji ile birlikte yazabilirsiniz)</label>
+                <input type="text" id="editCategoryName" placeholder="Örn: 🥙 Kokoreç">
+            </div>
+        `;
+        document.getElementById('editModal').classList.add('active');
+    }
+
+    async function editCategory(categoryId) {
+        try {
+            const doc = await categoriesRef.doc(categoryId).get();
+            const category = doc.data();
+            currentEditType = 'editCategory';
+            currentEditData = { categoryId };
+            document.getElementById('editModalTitle').textContent = 'Kategori Düzenle';
+            document.getElementById('editModalBody').innerHTML = `
+                <div class="edit-form-group">
+                    <label>Kategori Adı</label>
+                    <input type="text" id="editCategoryName" value="${category.name || ''}">
+                </div>
+            `;
+            document.getElementById('editModal').classList.add('active');
+        } catch (error) {
+            showMessage('Hata: ' + error.message, 'error');
+        }
+    }
+
+    async function deleteCategory(categoryId) {
+        if (confirm('Bu kategoriyi ve içindeki tüm ürünleri silmek istediğinize emin misiniz?')) {
+            try {
+                const productsSnapshot = await productsRef.where('category', '==', categoryId).get();
+                const batch = db.batch();
+                productsSnapshot.forEach(doc => { batch.delete(doc.ref); });
+                await batch.commit();
+                await categoriesRef.doc(categoryId).delete();
+                showMessage('Kategori ve ürünler silindi!', 'success');
+                loadAdminData();
+            } catch (error) {
+                showMessage('Hata: ' + error.message, 'error');
+            }
+        }
+    }
+
+    // ============ ÜRÜN İŞLEMLERİ ============
+    function addProduct(categoryId) {
+        currentEditType = 'addProduct';
+        currentEditData = { categoryId };
+        document.getElementById('editModalTitle').textContent = 'Yeni Ürün Ekle';
+        document.getElementById('editModalBody').innerHTML = `
+            <div class="edit-form-group">
+                <label>Ürün Adı</label>
+                <input type="text" id="editProductName" placeholder="Örn: Kokoreç">
+            </div>
+            <div class="edit-form-group">
+                <label>Açıklama</label>
+                <input type="text" id="editProductDesc" placeholder="Örn: Özel baharatlarla hazırlanan">
+            </div>
+            <div class="edit-form-group">
+                <label>Fiyat</label>
+                <input type="text" id="editProductPrice" placeholder="Örn: 500 TL">
+            </div>
+            <div class="edit-form-group">
+                <label>Kalori</label>
+                <input type="text" id="editProductCalories" placeholder="Örn: 650 kcal">
+            </div>
+            <div class="edit-form-group">
+                <label>Görsel URL</label>
+                <input type="text" id="editProductImage" placeholder="https://...">
+            </div>
+        `;
+        document.getElementById('editModal').classList.add('active');
+    }
+
+    async function editProduct(categoryId, productId) {
+        try {
+            const doc = await productsRef.doc(productId).get();
+            const product = doc.data();
+            currentEditType = 'editProduct';
+            currentEditData = { categoryId, productId };
+            document.getElementById('editModalTitle').textContent = 'Ürün Düzenle';
+            document.getElementById('editModalBody').innerHTML = `
+                <div class="edit-form-group">
+                    <label>Ürün Adı</label>
+                    <input type="text" id="editProductName" value="${product.name || ''}">
+                </div>
+                <div class="edit-form-group">
+                    <label>Açıklama</label>
+                    <input type="text" id="editProductDesc" value="${product.description || ''}">
+                </div>
+                <div class="edit-form-group">
+                    <label>Fiyat</label>
+                    <input type="text" id="editProductPrice" value="${product.price || ''}">
+                </div>
+                <div class="edit-form-group">
+                    <label>Kalori</label>
+                    <input type="text" id="editProductCalories" value="${product.calories || ''}">
+                </div>
+                <div class="edit-form-group">
+                    <label>Görsel URL</label>
+                    <input type="text" id="editProductImage" value="${product.image || ''}">
+                </div>
+            `;
+            document.getElementById('editModal').classList.add('active');
+        } catch (error) {
+            showMessage('Hata: ' + error.message, 'error');
+        }
+    }
+
+    async function deleteProduct(categoryId, productId) {
+        if (confirm('Bu ürünü silmek istediğinize emin misiniz?')) {
+            try {
+                await productsRef.doc(productId).delete();
+                showMessage('Ürün silindi!', 'success');
+                loadAdminData();
+            } catch (error) {
+                showMessage('Hata: ' + error.message, 'error');
+            }
+        }
+    }
+
+    // ============ KAYDETME ============
+    async function saveEdit() {
+        try {
+            if (currentEditType === 'addCategory') {
+                const name = document.getElementById('editCategoryName').value.trim();
+                if (!name) { showMessage('Kategori adı boş olamaz!', 'error'); return; }
+                await categoriesRef.add({
+                    name,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                showMessage('Kategori eklendi!', 'success');
+                closeEditModal();
+                loadAdminData();
+            }
+            else if (currentEditType === 'editCategory') {
+                const name = document.getElementById('editCategoryName').value.trim();
+                if (!name) { showMessage('Kategori adı boş olamaz!', 'error'); return; }
+                await categoriesRef.doc(currentEditData.categoryId).update({ name });
+                showMessage('Kategori güncellendi!', 'success');
+                closeEditModal();
+                loadAdminData();
+            }
+            else if (currentEditType === 'addProduct') {
+                const name = document.getElementById('editProductName').value.trim();
+                const price = document.getElementById('editProductPrice').value.trim();
+                if (!name || !price) { showMessage('Ürün adı ve fiyat zorunludur!', 'error'); return; }
+                await productsRef.add({
+                    categoryId: currentEditData.categoryId,
+                    name,
+                    description: document.getElementById('editProductDesc').value.trim(),
+                    price,
+                    calories: document.getElementById('editProductCalories').value.trim(),
+                    image: document.getElementById('editProductImage').value.trim(),
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                showMessage('Ürün eklendi!', 'success');
+                closeEditModal();
+                loadAdminData();
+            }
+            else if (currentEditType === 'editProduct') {
+                await productsRef.doc(currentEditData.productId).update({
+                    name: document.getElementById('editProductName').value.trim(),
+                    description: document.getElementById('editProductDesc').value.trim(),
+                    price: document.getElementById('editProductPrice').value.trim(),
+                    calories: document.getElementById('editProductCalories').value.trim(),
+                    image: document.getElementById('editProductImage').value.trim()
+                });
+                showMessage('Ürün güncellendi!', 'success');
+                closeEditModal();
+                loadAdminData();
+            }
+        } catch (error) {
+            showMessage('Hata: ' + error.message, 'error');
+        }
+    }
+
+    function closeEditModal() {
+        document.getElementById('editModal').classList.remove('active');
+        currentEditType = '';
+        currentEditData = {};
+    }
+
+    // ============ MESAJ ============
+    function showMessage(text, type) {
+        const msg = document.getElementById('adminSuccessMsg');
+        const msgText = document.getElementById('adminMsgText');
+        msg.className = 'admin-success-msg ' + type;
+        msgText.textContent = text;
+        msg.style.display = 'block';
+        setTimeout(() => { msg.style.display = 'none'; }, 3000);
+    }
+
+    // ============ EVENT LISTENERS ============
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeEditModal();
+            closeAdminPanel();
+            document.getElementById('loginModal').classList.remove('active');
+        }
+    });
+
+    document.getElementById('editModal').addEventListener('click', (e) => {
+        if (e.target.id === 'editModal') closeEditModal();
+    });
+    document.getElementById('adminModal').addEventListener('click', (e) => {
+        if (e.target.id === 'adminModal') closeAdminPanel();
+    });
+    document.getElementById('loginModal').addEventListener('click', (e) => {
+        if (e.target.id === 'loginModal') document.getElementById('loginModal').classList.remove('active');
+    });
+</script>
+<!-- ============ FIRESTORE ADMIN PANELİ BİTİŞ ============ -->
 </body>
 </html>
