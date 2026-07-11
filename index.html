@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <title>Gol Döner | Keçiören Döner, Kokoreç, Tost, Hamburger</title>
-
-<meta name="description" content="Gol Döner Keçiören'de tavuk döner, Hatay usulü döner, kokoreç, köfte ekmek, tost çeşitleri, çorba ve içecekler sunmaktadır.">
-
-<meta name="keywords" content="Gol Döner, Keçiören döner, Keçiören kokoreç, Hatay usulü döner, tavuk döner, Keçiören tost, Keçiören hamburger">
-
-<meta name="robots" content="index, follow">
-
-<meta name="author" content="Gol Döner">
-
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="H9kPnLUGPtDHVwYtzI9VvwaegwvSdZX0ddEQPgndXko" />
-    <title>Keçiören Gece Kokoreççisi Ve Döner Izgara Köfte ve Çiğköftecisi | Lezzetin Adresi</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<title>Gol Döner | Keçiören Döner, Kokoreç, Hatay Usulü Döner, Köfte ve Tost</title>
+
+<meta name="description" content="Gol Döner Keçiören'de tavuk döner, Hatay usulü döner, kokoreç, köfte ekmek, tost çeşitleri, çiğ köfte, hamburger, çorba ve içecekleriyle hizmet vermektedir.">
+
+<meta name="keywords" content="Gol Döner, Keçiören döner, Keçiören kokoreç, Keçiören köfte, Keçiören tost, Hatay usulü döner, Ankara döner, Çiğ köfte, Hamburger">
+
+<meta name="robots" content="index,follow">
+<meta name="author" content="Gol Döner">
+<meta name="google-site-verification" content="H9kPnLUGPtDHVwYtzI9VvwaegwvSdZX0ddEQPgndXko">
+
+<link rel="canonical" href="https://goldoner.duckdns.org/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gol Döner | Keçiören Döner ve Kokoreç">
+<meta property="og:description" content="Keçiören'de döner, kokoreç, köfte, tost, hamburger ve çorba çeşitleri.">
+<meta property="og:url" content="https://goldoner.duckdns.org/">
+
+<link rel="icon" href="/favicon.ico">
     <style>
         * {
             margin: 0;
@@ -1461,7 +1464,7 @@
     import { auth } from './firebase.js';
     import { db } from './firebase.js';
     import { signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    import { collection, getDocs, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
    auth.onAuthStateChanged(async (user) => {
     const authBtn = document.getElementById('authBtn');
@@ -1477,17 +1480,19 @@
         }
         
         try {
-            const userDocSnap = await getDocs(collection(db, "users"));
-            let isAdmin = false;
-            
-            userDocSnap.forEach((docSnap) => {
-                if (docSnap.id === user.uid) {
-                    const data = docSnap.data();
-                    console.log('Kullanıcı rolü:', data.role);
-                    if (data.role === 'admin') {
-                        isAdmin = true;
-                    }
-                }
+           const userRef = doc(db, "users", user.uid);
+const userSnap = await getDoc(userRef);
+
+let isAdmin = false;
+
+if (userSnap.exists()) {
+    const data = userSnap.data();
+    console.log("Kullanıcı rolü:", data.role);
+
+    if (data.role === "admin") {
+        isAdmin = true;
+    }
+}
             });
             
             if (isAdmin) {
@@ -1511,6 +1516,35 @@
     }
 });
 </script>
+    });
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Restaurant",
+  "name":"Gol Döner",
+  "url":"https://goldoner.duckdns.org/",
+  "servesCuisine":[
+    "Döner",
+    "Kokoreç",
+    "Hamburger",
+    "Köfte",
+    "Tost",
+    "Çiğ Köfte"
+  ],
+  "priceRange":"₺",
+  "address":{
+    "@type":"PostalAddress",
+    "addressLocality":"Keçiören",
+    "addressRegion":"Ankara",
+    "addressCountry":"TR"
+  }
+}
+</script>
+
+</head>
+<body>
 </head>
 <body>
 
