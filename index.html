@@ -4,21 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Gol Döner | Keçiören Döner, Kokoreç, Hatay Usulü Döner, Köfte ve Tost</title>
+<title>Gold Food | Döner, Kokoreç, Izgara ve Waffle</title>
 
-<meta name="description" content="Gol Döner Keçiören'de tavuk döner, Hatay usulü döner, kokoreç, köfte ekmek, tost çeşitleri, çiğ köfte, hamburger, çorba ve içecekleriyle hizmet vermektedir.">
+<meta name="description" content="Gold Food Keçiören'de döner, kokoreç, ızgara, waffle, köfte ekmek, tost çeşitleri, çiğ köfte, hamburger ve içecekleriyle hizmet vermektedir.">
 
-<meta name="keywords" content="Gol Döner, Keçiören döner, Keçiören kokoreç, Keçiören köfte, Keçiören tost, Hatay usulü döner, Ankara döner, Çiğ köfte, Hamburger">
+<meta name="keywords" content="Gold Food, Keçiören döner, Keçiören kokoreç, waffle, Keçiören köfte, Keçiören tost, Hatay usulü döner, Ankara döner, Çiğ köfte, Hamburger">
 
 <meta name="robots" content="index,follow">
-<meta name="author" content="Gol Döner">
+<meta name="author" content="Gold Food">
 <meta name="google-site-verification" content="H9kPnLUGPtDHVwYtzI9VvwaegwvSdZX0ddEQPgndXko">
 
 <link rel="canonical" href="https://goldoner.duckdns.org/">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Gol Döner | Keçiören Döner ve Kokoreç">
-<meta property="og:description" content="Keçiören'de döner, kokoreç, köfte, tost, hamburger ve çorba çeşitleri.">
+<meta property="og:title" content="Gold Food | Döner, Kokoreç, Izgara ve Waffle">
+<meta property="og:description" content="Keçiören'de döner, kokoreç, köfte, tost, waffle, hamburger ve çorba çeşitleri.">
 <meta property="og:url" content="https://goldoner.duckdns.org/">
 
 <link rel="icon" href="/favicon.ico">
@@ -33,13 +33,15 @@
             --gold: #D4A017;
             --gold-light: #F2C94C;
             --gold-dark: #B8860B;
-            --black: #1a1a1a;
-            --dark: #111111;
-            --dark-card: #1e1e1e;
+            --black: #0a0a0a;
+            --dark: #1a0a0a;
+            --dark-card: #2d1810;
             --white: #ffffff;
             --gray: #aaaaaa;
-            --red: #C41E3A;
-            --green: #25D366;
+            --red: #DC143C;
+            --red-dark: #8B0000;
+            --red-light: #FF6B6B;
+            --orange: #FF4500;
             --allergen-bg: #fff3cd;
             --allergen-text: #856404;
         }
@@ -50,7 +52,8 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--dark);
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 25%, #2d1810 50%, #1a0a0a 75%, #0a0a0a 100%);
+            background-attachment: fixed;
             color: var(--white);
             overflow-x: hidden;
         }
@@ -81,14 +84,17 @@
 
         .section-title h2 {
             font-size: 2.8rem;
-            color: var(--gold);
+            background: linear-gradient(135deg, var(--red-light), var(--red), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 10px;
         }
 
         .section-title .line {
             width: 80px;
             height: 3px;
-            background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+            background: linear-gradient(90deg, var(--red), var(--orange), var(--gold));
             margin: 15px auto;
             border-radius: 2px;
         }
@@ -107,7 +113,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--dark);
+            background: linear-gradient(135deg, #1a0a0a, #0a0a0a);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -126,7 +132,7 @@
 
         .loader-icon {
             font-size: 4rem;
-            color: var(--gold);
+            color: var(--red);
             animation: spin 1.5s linear infinite;
         }
 
@@ -153,13 +159,16 @@
             z-index: 1000;
             padding: 20px 0;
             transition: all 0.4s ease;
+            background: linear-gradient(180deg, rgba(10,10,10,0.98) 0%, rgba(26,10,10,0.95) 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(220,20,60,0.3);
         }
 
         .navbar.scrolled {
-            background: rgba(17, 17, 17, 0.95);
+            background: rgba(10, 10, 10, 0.98);
             backdrop-filter: blur(20px);
             padding: 12px 0;
-            box-shadow: 0 2px 30px rgba(212, 160, 23, 0.1);
+            box-shadow: 0 2px 30px rgba(220, 20, 60, 0.4);
         }
 
         .navbar .container {
@@ -177,20 +186,24 @@
         .logo-icon {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-            border-radius: 50%;
+            background: linear-gradient(135deg, var(--red), var(--orange));
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            color: var(--dark);
+            color: var(--white);
             font-weight: 900;
             font-family: 'Playfair Display', serif;
+            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.5);
         }
 
         .logo-text h3 {
-            font-size: 1.3rem;
-            color: var(--gold);
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, var(--red-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             line-height: 1;
         }
 
@@ -222,12 +235,12 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--gold);
+            background: linear-gradient(90deg, var(--red), var(--orange));
             transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: var(--gold);
+            color: var(--red-light);
         }
 
         .nav-links a:hover::after {
@@ -235,7 +248,7 @@
         }
 
         .nav-cta {
-            background: linear-gradient(135deg, var(--red), #8B0000);
+            background: linear-gradient(135deg, var(--red), var(--red-dark));
             color: var(--white) !important;
             padding: 8px 15px;
             border-radius: 50px;
@@ -249,7 +262,7 @@
 
         .nav-cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(196, 30, 58, 0.4);
+            box-shadow: 0 5px 20px rgba(220, 20, 60, 0.6);
             color: var(--white) !important;
         }
 
@@ -264,7 +277,7 @@
         .hamburger span {
             width: 30px;
             height: 2px;
-            background: var(--gold);
+            background: var(--red);
             transition: all 0.3s ease;
         }
 
@@ -306,7 +319,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(17,17,17,0.97) 0%, rgba(17,17,17,0.8) 50%, rgba(17,17,17,0.9) 100%);
+            background: linear-gradient(135deg, rgba(10,10,10,0.95) 0%, rgba(26,10,10,0.9) 50%, rgba(45,24,16,0.9) 100%);
             z-index: 1;
         }
 
@@ -316,25 +329,33 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: radial-gradient(circle at 20% 50%, rgba(212,160,23,0.05) 0%, transparent 50%),
-                              radial-gradient(circle at 80% 20%, rgba(212,160,23,0.03) 0%, transparent 50%);
+            background-image: radial-gradient(circle at 20% 50%, rgba(220,20,60,0.15) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 20%, rgba(255,69,0,0.1) 0%, transparent 50%),
+                              radial-gradient(circle at 40% 80%, rgba(212,160,23,0.08) 0%, transparent 50%);
             z-index: 0;
         }
 
         .hero .container {
             position: relative;
             z-index: 2;
-            text-align: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content {
+            text-align: left;
         }
 
         .hero-badge {
             display: inline-block;
-            background: rgba(196, 30, 58, 0.1);
-            border: 1px solid rgba(196, 30, 58, 0.3);
+            background: rgba(220, 20, 60, 0.2);
+            border: 2px solid rgba(220, 20, 60, 0.5);
             padding: 8px 25px;
             border-radius: 50px;
             font-size: 0.85rem;
-            color: var(--red);
+            color: var(--red-light);
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-bottom: 25px;
@@ -342,7 +363,7 @@
         }
 
         .hero h1 {
-            font-size: 4.5rem;
+            font-size: 4rem;
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 20px;
@@ -350,30 +371,40 @@
         }
 
         .hero h1 .gold {
-            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--red));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+
+        .hero h1 .waffle-text {
+            background: linear-gradient(135deg, var(--red), var(--orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            font-size: 3rem;
+            margin-top: 10px;
         }
 
         .hero p {
             font-size: 1.2rem;
             color: var(--gray);
             max-width: 600px;
-            margin: 0 auto 40px;
+            margin: 0 auto 40px 0;
             animation: fadeInUp 1s ease 0.4s both;
         }
 
         .hero-buttons {
             display: flex;
             gap: 20px;
-            justify-content: center;
+            justify-content: flex-start;
             animation: fadeInUp 1s ease 0.6s both;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-            color: var(--dark);
+            background: linear-gradient(135deg, var(--red), var(--orange));
+            color: var(--white);
             padding: 15px 40px;
             border-radius: 50px;
             font-weight: 600;
@@ -385,7 +416,7 @@
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(212, 160, 23, 0.4);
+            box-shadow: 0 10px 30px rgba(220, 20, 60, 0.5);
         }
 
         .btn-secondary {
@@ -401,9 +432,21 @@
         }
 
         .btn-secondary:hover {
-            border-color: var(--gold);
-            color: var(--gold);
+            border-color: var(--red);
+            color: var(--red-light);
             transform: translateY(-3px);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(220,20,60,0.3);
+            border: 3px solid rgba(220,20,60,0.3);
         }
 
         .hero-scroll {
@@ -416,7 +459,7 @@
         }
 
         .hero-scroll a {
-            color: var(--gold);
+            color: var(--red);
             font-size: 1.5rem;
         }
 
@@ -439,7 +482,7 @@
         /* CARDS SECTION */
         .cards-section {
             padding: 100px 0;
-            background: var(--dark);
+            background: transparent;
             position: relative;
         }
 
@@ -450,7 +493,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(ellipse at center, rgba(212,160,23,0.03) 0%, transparent 70%);
+            background: radial-gradient(ellipse at center, rgba(220,20,60,0.05) 0%, transparent 70%);
         }
 
         .cards-grid {
@@ -465,7 +508,7 @@
             background: var(--dark-card);
             border-radius: 20px;
             overflow: hidden;
-            border: 1px solid rgba(212, 160, 23, 0.1);
+            border: 2px solid rgba(220, 20, 60, 0.3);
             transition: all 0.4s ease;
             position: relative;
             cursor: pointer;
@@ -478,7 +521,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(212,160,23,0.05), transparent);
+            background: linear-gradient(135deg, rgba(220,20,60,0.1), transparent);
             opacity: 0;
             transition: opacity 0.4s ease;
             z-index: 0;
@@ -486,8 +529,8 @@
 
         .card:hover {
             transform: translateY(-10px);
-            border-color: rgba(212, 160, 23, 0.3);
-            box-shadow: 0 20px 60px rgba(212, 160, 23, 0.15);
+            border-color: rgba(220, 20, 60, 0.6);
+            box-shadow: 0 20px 60px rgba(220, 20, 60, 0.3);
         }
 
         .card:hover::before {
@@ -518,15 +561,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, transparent 40%, rgba(30,30,30,0.9));
+            background: linear-gradient(to bottom, transparent 40%, rgba(45,24,16,0.9));
         }
 
         .card-image .card-badge {
             position: absolute;
             top: 15px;
             right: 15px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-            color: var(--dark);
+            background: linear-gradient(135deg, var(--red), var(--orange));
+            color: var(--white);
             padding: 5px 15px;
             border-radius: 50px;
             font-size: 0.75rem;
@@ -544,13 +587,13 @@
         .card-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            background: linear-gradient(135deg, var(--red), var(--orange));
             border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            color: var(--dark);
+            color: var(--white);
             margin-top: -50px;
             position: relative;
             z-index: 2;
@@ -559,7 +602,10 @@
 
         .card-content h3 {
             font-size: 1.5rem;
-            color: var(--gold);
+            background: linear-gradient(135deg, var(--red-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 10px;
         }
 
@@ -604,7 +650,8 @@
         .about-image img {
             width: 100%;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 60px rgba(220,20,60,0.3);
+            border: 3px solid rgba(220,20,60,0.3);
         }
 
         .about-image .gold-frame {
@@ -613,14 +660,22 @@
             left: -15px;
             width: 100%;
             height: 100%;
-            border: 3px solid var(--gold);
+            border: 3px solid transparent;
             border-radius: 20px;
             z-index: -1;
+            background: linear-gradient(135deg, var(--red), var(--orange), var(--gold)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
         }
 
         .about-content h2 {
             font-size: 2.5rem;
-            color: var(--gold);
+            background: linear-gradient(135deg, var(--red-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 20px;
         }
 
@@ -642,12 +697,15 @@
             padding: 20px;
             background: var(--dark-card);
             border-radius: 15px;
-            border: 1px solid rgba(212,160,23,0.1);
+            border: 2px solid rgba(220,20,60,0.2);
         }
 
         .stat h3 {
             font-size: 2rem;
-            color: var(--gold);
+            background: linear-gradient(135deg, var(--red), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .stat p {
@@ -658,7 +716,7 @@
 
         /* LEGAL INFO BANNER */
         .legal-banner {
-            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+            background: linear-gradient(135deg, var(--red-dark), var(--red));
             padding: 20px 0;
             text-align: center;
         }
@@ -678,7 +736,7 @@
             background: rgba(255,255,255,0.2);
             padding: 10px 20px;
             border-radius: 50px;
-            color: var(--dark);
+            color: var(--white);
             font-weight: 600;
         }
 
@@ -689,7 +747,7 @@
         /* MENU SECTION */
         .menu-section {
             padding: 100px 0;
-            background: var(--dark);
+            background: transparent;
         }
 
         .menu-tabs {
@@ -704,7 +762,7 @@
             padding: 12px 30px;
             border-radius: 50px;
             background: var(--dark-card);
-            border: 1px solid rgba(212,160,23,0.1);
+            border: 2px solid rgba(220,20,60,0.3);
             color: var(--gray);
             font-weight: 500;
             cursor: pointer;
@@ -714,9 +772,9 @@
         }
 
         .menu-tab:hover, .menu-tab.active {
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-            color: var(--dark);
-            border-color: var(--gold);
+            background: linear-gradient(135deg, var(--red), var(--orange));
+            color: var(--white);
+            border-color: var(--red);
         }
 
         .menu-grid {
@@ -732,12 +790,12 @@
             background: var(--dark-card);
             border-radius: 15px;
             padding: 20px;
-            border: 1px solid rgba(212,160,23,0.05);
+            border: 2px solid rgba(220,20,60,0.2);
             transition: all 0.3s ease;
         }
 
         .menu-item:hover {
-            border-color: rgba(212,160,23,0.2);
+            border-color: rgba(220,20,60,0.5);
             transform: translateY(-5px);
         }
 
@@ -753,7 +811,7 @@
             border-radius: 12px;
             overflow: hidden;
             flex-shrink: 0;
-            border: 2px solid var(--gold);
+            border: 2px solid var(--red);
         }
 
         .menu-item-image img {
@@ -783,12 +841,12 @@
         .menu-item-price {
             font-size: 1.3rem;
             font-weight: 700;
-            color: var(--gold);
+            background: linear-gradient(135deg, var(--red), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             white-space: nowrap;
             font-family: 'Playfair Display', serif;
-            background: linear-gradient(135deg, var(--red), #8B0000);
-            padding: 8px 15px;
-            border-radius: 8px;
         }
 
         /* NUTRITION INFO */
@@ -820,7 +878,7 @@
         }
 
         .nutrition-label i {
-            color: var(--gold);
+            color: var(--red);
             width: 20px;
         }
 
@@ -834,8 +892,8 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-            color: var(--dark);
+            background: linear-gradient(135deg, var(--red), var(--orange));
+            color: var(--white);
             padding: 5px 12px;
             border-radius: 20px;
             font-weight: 700;
@@ -884,11 +942,14 @@
             padding: 40px;
             text-align: center;
             margin: 40px 0;
-            border: 2px solid var(--gold);
+            border: 2px solid rgba(220,20,60,0.4);
         }
 
         .qr-section h3 {
-            color: var(--gold);
+            background: linear-gradient(135deg, var(--red-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 20px;
             font-size: 1.8rem;
         }
@@ -956,7 +1017,7 @@
         /* TESTIMONIALS */
         .testimonials {
             padding: 100px 0;
-            background: var(--dark);
+            background: transparent;
         }
 
         .testimonials-grid {
@@ -969,19 +1030,19 @@
             background: var(--dark-card);
             border-radius: 20px;
             padding: 35px;
-            border: 1px solid rgba(212,160,23,0.05);
+            border: 2px solid rgba(220,20,60,0.2);
             position: relative;
             transition: all 0.3s ease;
         }
 
         .testimonial:hover {
-            border-color: rgba(212,160,23,0.2);
+            border-color: rgba(220,20,60,0.5);
             transform: translateY(-5px);
         }
 
         .testimonial .quote-icon {
             font-size: 3rem;
-            color: rgba(212,160,23,0.2);
+            color: rgba(220,20,60,0.2);
             position: absolute;
             top: 20px;
             right: 25px;
@@ -1012,7 +1073,7 @@
             height: 45px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--gold);
+            border: 2px solid var(--red);
         }
 
         .testimonial-author h5 {
@@ -1041,7 +1102,10 @@
 
         .contact-info h3 {
             font-size: 2rem;
-            color: var(--gold);
+            background: linear-gradient(135deg, var(--red-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 20px;
         }
 
@@ -1061,14 +1125,15 @@
         .contact-item-icon {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, rgba(212,160,23,0.1), rgba(212,160,23,0.05));
+            background: linear-gradient(135deg, rgba(220,20,60,0.3), rgba(255,69,0,0.3));
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--gold);
-            font-size: 1.2rem;
+            color: var(--white);
+            font-size: 1.5rem;
             flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(220,20,60,0.3);
         }
 
         .contact-item-text h5 {
@@ -1088,12 +1153,15 @@
             background: var(--dark-card);
             border-radius: 20px;
             padding: 40px;
-            border: 1px solid rgba(212,160,23,0.1);
+            border: 2px solid rgba(220,20,60,0.3);
         }
 
         .contact-form h3 {
             font-size: 1.5rem;
-            color: var(--gold);
+            background: linear-gradient(135deg, var(--red-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 25px;
         }
 
@@ -1117,7 +1185,7 @@
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--gold);
+            border-color: var(--red);
         }
 
         .form-group textarea {
@@ -1134,8 +1202,8 @@
         .form-submit {
             width: 100%;
             padding: 15px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-            color: var(--dark);
+            background: linear-gradient(135deg, var(--red), var(--orange));
+            color: var(--white);
             border: none;
             border-radius: 12px;
             font-size: 1rem;
@@ -1147,14 +1215,14 @@
 
         .form-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(212,160,23,0.3);
+            box-shadow: 0 10px 30px rgba(220,20,60,0.4);
         }
 
         /* FOOTER */
         .footer {
             background: var(--black);
             padding: 60px 0 30px;
-            border-top: 1px solid rgba(212,160,23,0.1);
+            border-top: 2px solid rgba(220,20,60,0.3);
         }
 
         .footer-grid {
@@ -1166,7 +1234,10 @@
 
         .footer-brand h3 {
             font-size: 1.8rem;
-            color: var(--gold);
+            background: linear-gradient(135deg, var(--red-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 15px;
         }
 
@@ -1192,11 +1263,12 @@
             justify-content: center;
             color: var(--gray);
             transition: all 0.3s ease;
+            font-size: 1.2rem;
         }
 
         .footer-social a:hover {
-            background: var(--gold);
-            color: var(--dark);
+            background: linear-gradient(135deg, var(--red), var(--orange));
+            color: var(--white);
         }
 
         .footer-col h4 {
@@ -1218,7 +1290,7 @@
         }
 
         .footer-col ul li a:hover {
-            color: var(--gold);
+            color: var(--red);
         }
 
         .footer-bottom {
@@ -1233,7 +1305,10 @@
         }
 
         .footer-bottom .gold {
-            color: var(--gold);
+            background: linear-gradient(135deg, var(--gold), var(--red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         /* SCROLL TO TOP */
@@ -1243,19 +1318,20 @@
             right: 30px;
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            background: linear-gradient(135deg, var(--red), var(--orange));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--dark);
-            font-size: 1.2rem;
+            color: var(--white);
+            font-size: 1.5rem;
             cursor: pointer;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
             z-index: 999;
             border: none;
+            box-shadow: 0 4px 15px rgba(220,20,60,0.4);
         }
 
         .scroll-top.visible {
@@ -1265,7 +1341,7 @@
 
         .scroll-top:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(212,160,23,0.4);
+            box-shadow: 0 10px 30px rgba(220,20,60,0.5);
         }
 
         /* ANIMATIONS */
@@ -1282,6 +1358,14 @@
 
         /* RESPONSIVE */
         @media (max-width: 1024px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
             .cards-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -1316,7 +1400,11 @@
             }
 
             .hero h1 {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
+            }
+
+            .hero h1 .waffle-text {
+                font-size: 1.8rem;
             }
 
             .hero p {
@@ -1325,7 +1413,7 @@
 
             .hero-buttons {
                 flex-direction: column;
-                align-items: center;
+                align-items: flex-start;
             }
 
             .cards-grid {
@@ -1376,7 +1464,7 @@
 
         @media (max-width: 480px) {
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
 
             .about-stats {
@@ -1406,7 +1494,7 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             z-index: 999;
             box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
             transition: all 0.3s ease;
@@ -1454,7 +1542,10 @@
             text-align: center;
             padding: 30px;
             font-size: 1.5rem;
-            color: var(--gold);
+            background: linear-gradient(135deg, var(--red), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-weight: 700;
             font-family: 'Playfair Display', serif;
             letter-spacing: 2px;
@@ -1518,7 +1609,7 @@ if (userSnap.exists()) {
 {
   "@context":"https://schema.org",
   "@type":"Restaurant",
-  "name":"Gol Döner",
+  "name":"Gold Food",
   "url":"https://goldoner.duckdns.org/",
   "servesCuisine":[
     "Döner",
@@ -1526,6 +1617,7 @@ if (userSnap.exists()) {
     "Hamburger",
     "Köfte",
     "Tost",
+    "Waffle",
     "Çiğ Köfte"
   ],
   "priceRange":"₺",
@@ -1540,14 +1632,12 @@ if (userSnap.exists()) {
 
 </head>
 <body>
-</head>
-<body>
 
     <!-- PRELOADER -->
     <div id="preloader">
         <div class="loader">
-            <div class="loader-icon">🥙</div>
-            <p>KEÇİÖREN GECE KOKOREÇÇİ VE DÖNERCİSİ</p>
+            <div class="loader-icon">🧇</div>
+            <p>GOLD FOOD</p>
         </div>
     </div>
 
@@ -1555,10 +1645,10 @@ if (userSnap.exists()) {
     <nav class="navbar" id="navbar">
         <div class="container">
             <a href="#" class="logo">
-                <div class="logo-icon">K</div>
+                <div class="logo-icon">GF</div>
                 <div class="logo-text">
-                    <h3>Keçiören Gece Kokoreççisi</h3>
-                    <span>Lezzetin Adresi</span>
+                    <h3>Gold Food</h3>
+                    <span>Döner • Kokoreç • Izgara • Waffle</span>
                 </div>
             </a>
             <ul class="nav-links" id="navLinks">
@@ -1569,8 +1659,7 @@ if (userSnap.exists()) {
                 <li><a href="#yorumlar">Yorumlar</a></li>
                 <li><a href="#iletisim" class="nav-cta">İletişim</a></li>
                 <li><a href="admin.html" id="adminLink" style="display:none;">Admin Panel</a></li>
-                <li><a href="admin.html" id="adminLink" style="display:none;">Admin Panel</a></li>
-<li><a href="#" id="authBtn" class="nav-cta"><i class="fas fa-sign-in-alt"></i> Giriş Yap</a></li>
+                <li><a href="#" id="authBtn" class="nav-cta"><i class="fas fa-sign-in-alt"></i> Giriş Yap</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -1586,12 +1675,20 @@ if (userSnap.exists()) {
             <div class="hero-pattern"></div>
         </div>
         <div class="container">
-            <div class="hero-badge">⭐ Keçiören'in En Lezzetli Kokoreççisi ve Dönercisi</div>
-            <h1>Lezzetin <span class="gold">Gece</span><br>Kokoreç  Döner Izgara Köfte ve Çiğköftecisi</h1>
-            <p>Keçiören'in  Gece Kokoreç Döner Izgara Köfte ve Çiğköftecisi olarak, en kaliteli malzemelerle hazırlanan eşsiz kokoreç ve döner lezzetlerimizi sizlerle buluşturuyoruz. Her lokmada altın standartlar!</p>
-            <div class="hero-buttons">
-                <a href="#menu" class="btn-primary"><i class="fas fa-utensils"></i>&nbsp; Menüyü Keşfet</a>
-                <a href="#iletisim" class="btn-secondary"><i class="fas fa-phone"></i>&nbsp; Bize Ulaşın</a>
+            <div class="hero-content">
+                <div class="hero-badge">⭐ Gold Food - Lezzetin Altın Noktası</div>
+                <h1>
+                    Lezzetin <span class="gold">Altın</span> Dokunuşu
+                    <span class="waffle-text"> Efsane Waffle & Döner</span>
+                </h1>
+                <p>Gold Food olarak, Keçiören'de en kaliteli döner, kokoreç, ızgara ve özel waffle lezzetlerini sizlerle buluşturuyoruz. Her lokmada altın standartlar!</p>
+                <div class="hero-buttons">
+                    <a href="#menu" class="btn-primary"><i class="fas fa-utensils"></i>&nbsp; Menüyü Keşfet</a>
+                    <a href="#iletisim" class="btn-secondary"><i class="fas fa-phone"></i>&nbsp; Bize Ulaşın</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.deliveryhero.io/image/fd-tr/LH/zio3-hero.jpg" alt="Gold Food Waffle">
             </div>
         </div>
         <div class="hero-scroll">
@@ -1647,19 +1744,19 @@ if (userSnap.exists()) {
                     </div>
                 </div>
 
-                <!-- CARD 2: TOST -->
-                <div class="card reveal" onclick="scrollToMenu('tost')">
+                <!-- CARD 2: WAFFLE -->
+                <div class="card reveal" onclick="scrollToMenu('waffle')">
                     <div class="card-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt1CFv-e3xqP_Q1YvQKYkeI7RdzEDfzJnIk33rGMupPxFEVJg-LsMPeJj3&s=10" alt="Tost">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThFcYXDXdpOLn03ef6LDTcbR5hcg20ccXHpsJpPLi0GKQw__E31mgfvGg&s=10" alt="Waffle">
                         <div class="overlay"></div>
-                        <span class="card-badge">Favori</span>
+                        <span class="card-badge">Yeni</span>
                     </div>
                     <div class="card-content">
                         <div class="card-icon">
-                            <i class="fas fa-bread-slice"></i>
+                            <i class="fas fa-cookie-bite"></i>
                         </div>
-                        <h3>Tost Çeşitleri</h3>
-                        <p>Ayvalık tostu, sucuklu, kaşarlı ve karışık tost seçenekleri ile doyumsuz lezzetler.</p>
+                        <h3>Waffle</h3>
+                        <p>Belçika usulü özel waffle'larımız, çikolata, meyve ve çeşitli soslarla hazırlanır.</p>
                         <span class="card-link">Keşfet <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </div>
@@ -1667,7 +1764,7 @@ if (userSnap.exists()) {
                 <!-- CARD 3: DRINKS -->
                 <div class="card reveal" onclick="scrollToMenu('icecek')">
                     <div class="card-image">
-                        <img src="https://ardenmarket.com.tr/media/catalog/product/cache/c29f40cd0751e4f0d02f666b30317d7d/b/e/beypazari-soda-200ml.jpg" alt="İçecekler">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9K3Ei9SgIEwoUBm7j1HXA0oL_vshQ_I573kIXGhr4SbwhmJnnN5ndne8-&s=10" alt="İçecekler">
                         <div class="overlay"></div>
                         <span class="card-badge">Serinletici</span>
                     </div>
@@ -1689,13 +1786,13 @@ if (userSnap.exists()) {
         <div class="container">
             <div class="about-grid">
                 <div class="about-image reveal">
-                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&h=400&fit=crop" alt="Keçiören Gece Kokoreççisi">
+                    <img src="https://chatgpt.com/backend-api/estuary/content?id=file_00000000a9d88208bbc25567e83366f6&fn=gold_food_d%C3%BCkkan_tasarimi.jpg&cd=attachment&ts=496597&p=fs&cid=1&sig=7e5c4c2af02dcb968f426646c97d13cfd5810e1657eb45fdb7be25118749727f&v=0" alt="Gold Food Dükkan">
                     <div class="gold-frame"></div>
                 </div>
                 <div class="about-content reveal">
-                    <h2>Keçiören Gece Kokoreççisi Hikayesi</h2>
-                    <p>Keçiören Gece Kokoreççisi olarak, yılların deneyimi ve tutkusuyla en kaliteli kokoreç ve döneri siz değerli müşterilerimize sunmak için çalışıyoruz. Her gün taze hazırlanan malzemelerimiz, özel baharatlarımız ve geleneksel tariflerimizle lezzetin altın standartlarını belirliyoruz.</p>
-                    <p>Müşteri memnuniyeti bizim için her şeyden önemli. Temizlik, kalite ve lezzet üçgeninde, her lokmada güven ve mutluluk sunmayı hedefliyoruz.</p>
+                    <h2>Gold Food Hikayesi</h2>
+                    <p>Gold Food olarak, yılların deneyimi ve tutkusuyla en kaliteli döner, kokoreç, ızgara ve özel waffle lezzetlerini siz değerli müşterilerimize sunmak için çalışıyoruz. Her gün taze hazırlanan malzemelerimiz, özel baharatlarımız ve geleneksel tariflerimizle lezzetin altın standartlarını belirliyoruz.</p>
+                    <p>Özellikle waffle tutkunları için hazırladığımız özel tariflerimiz, Belçika usulü hamurumuz ve zengin sos seçeneklerimizle unutulmaz bir lezzet deneyimi sunuyoruz. Müşteri memnuniyeti bizim için her şeyden önemli. Temizlik, kalite ve lezzet üçgeninde, her lokmada güven ve mutluluk sunmayı hedefliyoruz.</p>
                     <div class="hours-badge">
                         <span class="hours-dot"></span>
                         Şu an açığız &bull; 10:00 - 00:00
@@ -1725,7 +1822,7 @@ if (userSnap.exists()) {
             <div class="qr-section reveal">
                 <h3><i class="fas fa-qrcode"></i> Ürün Bilgilerine QR Kod ile Ulaşın</h3>
                 <div class="qr-content">
-                    </div>
+                    <div class="qr-code">
                         <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://goldoner.duckdns.org/" alt="QR Kod">
                     </div>
                     <div class="qr-info">
@@ -1750,13 +1847,14 @@ if (userSnap.exists()) {
                 <div class="line"></div>
                 <p>En sevilen lezzetlerimizi keşfedin - Alerjen ve kalori bilgileri ile</p>
             </div>
-                    <div class="menu-tabs reveal">
-            <button class="menu-tab active" onclick="switchTab('all', this)">🍽️ Tümü</button>
+            <div class="menu-tabs reveal">
+                <button class="menu-tab active" onclick="switchTab('all', this)">🍽️ Tümü</button>
+            </div>
+            <div id="menuContainer"></div>
         </div>
-        <div id="menuContainer"></div>
-    </div>
-</section>
-    <div class="tagline reveal">⭐ EN LEZZETLİ KOKOREÇ & DÖNER! ⭐</div>
+    </section>
+
+    <div class="tagline reveal">⭐ GOLD FOOD - LEZZETİN ALTIN NOKTASI! ⭐</div>
 
     <!-- TESTIMONIALS -->
     <section class="testimonials" id="yorumlar">
@@ -1776,9 +1874,9 @@ if (userSnap.exists()) {
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p>"Keçiören Gece Kokoreççisi'nde yediğim en iyi kokoreçti! Et çok taze ve lezzetliydi. Alerjen bilgileri de çok net, gluten hassasiyetim var, güvenle yiyebiliyorum. Kesinlikle tekrar geleceğim."</p>
+                    <p>"Gold Food'da yediğim waffle inanılmazdı! Hem döner hem de waffle mükemmeldi. Alerjen bilgileri çok net, gluten hassasiyetim var, güvenle yiyebiliyorum. Kesinlikle tekrar geleceğim."</p>
                     <div class="testimonial-author">
-                        <div style="width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;color:var(--dark);font-weight:bold;">MY</div>
+                        <div style="width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--red));display:flex;align-items:center;justify-content:center;color:var(--dark);font-weight:bold;">MY</div>
                         <div>
                             <h5>Mehmet Y.</h5>
                             <span>Düzenli Müşteri</span>
@@ -1796,7 +1894,7 @@ if (userSnap.exists()) {
                     </div>
                     <p>"Hatay usulü döner harikaydı! Porsiyonlar doyurucu, fiyatlar da çok uygun. Kalori bilgilerini görmek harika, diyet yapıyorum ve ne tükettiğimi bilmek çok önemli. Herkese tavsiye ederim."</p>
                     <div class="testimonial-author">
-                        <div style="width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;color:var(--dark);font-weight:bold;">AK</div>
+                        <div style="width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--red));display:flex;align-items:center;justify-content:center;color:var(--dark);font-weight:bold;">AK</div>
                         <div>
                             <h5>Ayşe K.</h5>
                             <span>Yemek Tutkunu</span>
@@ -1812,9 +1910,9 @@ if (userSnap.exists()) {
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star-half-alt"></i>
                     </div>
-                    <p>"Ailece geliyoruz, çocuklar bayılıyor. Temiz, güvenilir ve lezzetli. Süt alerjisi olan oğlum için alerjen bilgilerini görmek çok değerli. Keçiören Gece Kokoreççisi bizim vazgeçilmezimiz!"</p>
+                    <p>"Ailece geliyoruz, çocuklar waffle'a bayılıyor. Temiz, güvenilir ve lezzetli. Süt alerjisi olan oğlum için alerjen bilgilerini görmek çok değerli. Gold Food bizim vazgeçilmezimiz!"</p>
                     <div class="testimonial-author">
-                        <div style="width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;color:var(--dark);font-weight:bold;">AD</div>
+                        <div style="width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--red));display:flex;align-items:center;justify-content:center;color:var(--dark);font-weight:bold;">AD</div>
                         <div>
                             <h5>Ali D.</h5>
                             <span>Aile Müşterisi</span>
@@ -1840,7 +1938,7 @@ if (userSnap.exists()) {
 
                     <div class="contact-item">
                         <div class="contact-item-icon">
-                            <i class="fas fa-map-marker-alt"></i>
+                            
                         </div>
                         <div class="contact-item-text">
                             <h5>Adres</h5>
@@ -1850,7 +1948,7 @@ if (userSnap.exists()) {
 
                     <div class="contact-item">
                         <div class="contact-item-icon">
-                            <i class="fas fa-phone-alt"></i>
+                            📞
                         </div>
                         <div class="contact-item-text">
                             <h5>Telefon</h5>
@@ -1860,7 +1958,7 @@ if (userSnap.exists()) {
 
                     <div class="contact-item">
                         <div class="contact-item-icon">
-                            <i class="fas fa-envelope"></i>
+                            
                         </div>
                         <div class="contact-item-text">
                             <h5>E-posta</h5>
@@ -1870,7 +1968,7 @@ if (userSnap.exists()) {
 
                     <div class="contact-item">
                         <div class="contact-item-icon">
-                            <i class="fas fa-clock"></i>
+                            🕐
                         </div>
                         <div class="contact-item-text">
                             <h5>Çalışma Saatleri</h5>
@@ -1897,7 +1995,7 @@ if (userSnap.exists()) {
                             <textarea placeholder="Mesajınız..." required></textarea>
                         </div>
                         <button type="submit" class="form-submit">
-                            <i class="fas fa-paper-plane"></i>&nbsp; Mesaj Gönder
+                            ✉️ Mesaj Gönder
                         </button>
                     </form>
                 </div>
@@ -1910,13 +2008,13 @@ if (userSnap.exists()) {
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <h3>🥙 Keçiören Gece Kokoreççisi</h3>
-                    <p>Lezzetin altın standartları. En kaliteli kokoreç ve döner lezzetlerini sizlere sunuyoruz. Her lokmada altın standartlar!</p>
+                    <h3>🧇 Gold Food</h3>
+                    <p>Lezzetin altın standartları. En kaliteli döner, kokoreç, ızgara ve waffle lezzetlerini sizlere sunuyoruz. Her lokmada altın standartlar!</p>
                     <div class="footer-social">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="https://wa.me/905442665458" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-instagram">📷</i></a>
+                        <a href="#"><i class="fab fa-facebook-f">👍</i></a>
+                        <a href="#"><i class="fab fa-twitter">🐦</i></a>
+                        <a href="https://wa.me/905442665458" target="_blank"><i class="fab fa-whatsapp">💬</i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -1932,10 +2030,10 @@ if (userSnap.exists()) {
                 <div class="footer-col">
                     <h4>Kategoriler</h4>
                     <ul>
+                        <li><a href="#menu">Döner</a></li>
                         <li><a href="#menu">Kokoreç</a></li>
-                        <li><a href="#menu">Tavuk Döner</a></li>
-                        <li><a href="#menu">Tost</a></li>
-                        <li><a href="#menu">Diğer</a></li>
+                        <li><a href="#menu">Waffle</a></li>
+                        <li><a href="#menu">Izgara</a></li>
                         <li><a href="#menu">İçecekler</a></li>
                     </ul>
                 </div>
@@ -1953,7 +2051,7 @@ if (userSnap.exists()) {
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 <span class="gold">Keçiören Gece Kokoreççisi</span>. Tüm hakları saklıdır. Lezzetle kalın! 🥙</p>
+                <p>&copy; 2026 <span class="gold">Gold Food</span>. Tüm hakları saklıdır. Lezzetle kalın! 🧇</p>
                 <p style="margin-top: 10px; font-size: 0.75rem;"><i class="fas fa-info-circle"></i> Tarım ve Orman Bakanlığı düzenlemesi kapsamında tüm ürünlerimizin alerjen, içerik ve kalori bilgileri yukarıda sunulmuştur.</p>
             </div>
         </div>
@@ -1961,12 +2059,12 @@ if (userSnap.exists()) {
 
     <!-- SCROLL TO TOP -->
     <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
-        <i class="fas fa-arrow-up"></i>
+        ️
     </button>
 
     <!-- WHATSAPP BUTTON -->
     <a href="https://wa.me/905442665458" target="_blank" class="whatsapp-btn">
-        <i class="fab fa-whatsapp"></i>
+        💬
     </a>
 
     <!-- JAVASCRIPT -->
@@ -2003,38 +2101,6 @@ if (userSnap.exists()) {
                 navLinks.classList.remove('active');
             });
         });
-
-        // MENU TABS
-        function switchTab(tabId, btn) {
-            document.querySelectorAll('.menu-category').forEach(cat => {
-                cat.classList.remove('active');
-            });
-            document.querySelectorAll('.menu-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
-        }
-
-        function scrollToMenu(tabId) {
-            const menuSection = document.getElementById('menu');
-            menuSection.scrollIntoView({ behavior: 'smooth' });
-
-            setTimeout(() => {
-                const tabMap = {
-                    'kokorec': 0,
-                    'tavuk-doner': 1,
-                    'tost': 2,
-                    'diger': 3,
-                    'icecek': 4
-                };
-                if (tabMap[tabId] !== undefined) {
-                    const tabs = document.querySelectorAll('.menu-tab');
-                    switchTab(tabId, tabs[tabMap[tabId]]);
-                }
-            }, 600);
-        }
 
         // SCROLL REVEAL
         function revealOnScroll() {
@@ -2081,11 +2147,11 @@ if (userSnap.exists()) {
             const hour = now.getHours();
             const badge = document.querySelector('.hours-badge');
 
-            // Working hours: 10:00 - 18:30
-            const isOpen = (hour >= 10 && hour < 18) || (hour === 18 && now.getMinutes() <= 30);
+            // Working hours: 10:00 - 00:00
+            const isOpen = (hour >= 10 && hour < 24);
 
             if (isOpen) {
-                badge.innerHTML = '<span class="hours-dot"></span> Şu an açığız • 10:00 - 18:30';
+                badge.innerHTML = '<span class="hours-dot"></span> Şu an açığız • 10:00 - 00:00';
                 badge.style.borderColor = 'rgba(37, 211, 102, 0.3)';
                 badge.style.background = 'rgba(37, 211, 102, 0.1)';
                 badge.style.color = '#25D366';
@@ -2109,6 +2175,22 @@ if (userSnap.exists()) {
                 }
             });
         });
+
+        // Scroll to menu function
+        function scrollToMenu(categoryName) {
+            const menuSection = document.getElementById('menu');
+            menuSection.scrollIntoView({ behavior: 'smooth' });
+
+            setTimeout(() => {
+                // Find and click the appropriate tab
+                const tabs = document.querySelectorAll('.menu-tab');
+                tabs.forEach(tab => {
+                    if (tab.textContent.toLowerCase().includes(categoryName.toLowerCase())) {
+                        tab.click();
+                    }
+                });
+            }, 600);
+        }
     </script>
     <script type="module">
     import { db } from './firebase.js';
@@ -2143,7 +2225,7 @@ if (userSnap.exists()) {
         } catch (error) {
             console.error('Menü yüklenirken hata:', error);
             document.getElementById('menuContainer').innerHTML = 
-                '<p style="text-align: center; color: #C41E3A;">Menü yüklenirken hata oluştu.</p>';
+                '<p style="text-align: center; color: #DC143C;">Menü yüklenirken hata oluştu.</p>';
         }
     }
 
@@ -2188,29 +2270,29 @@ if (userSnap.exists()) {
             }).join('') : '';
 
             html += `
-                <div class="menu-item" style="background: #1e1e1e; border-radius: 15px; padding: 20px; border: 1px solid rgba(212, 160, 23, 0.1);">
+                <div class="menu-item" style="background: #2d1810; border-radius: 15px; padding: 20px; border: 2px solid rgba(220, 20, 60, 0.2);">
                     <div class="menu-item-header" style="display: flex; align-items: center; gap: 20px; margin-bottom: 15px;">
-                        <div class="menu-item-image" style="width: 100px; height: 100px; border-radius: 12px; overflow: hidden; border: 2px solid #D4A017; flex-shrink: 0;">
-                            ${product.imageUrl ? `<img src="${product.imageUrl}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover;">` : '<div style="width:100%;height:100%;background:#2a2a2a;display:flex;align-items:center;justify-content:center;color:#aaa;"><i class="fas fa-image fa-2x"></i></div>'}
+                        <div class="menu-item-image" style="width: 100px; height: 100px; border-radius: 12px; overflow: hidden; border: 2px solid #DC143C; flex-shrink: 0;">
+                            ${product.imageUrl ? `<img src="${product.imageUrl}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover;">` : '<div style="width:100%;height:100%;background:#1a0a0a;display:flex;align-items:center;justify-content:center;color:#aaa;"><i class="fas fa-image fa-2x"></i></div>'}
                         </div>
                         <div class="menu-item-info" style="flex: 1;">
                             <h4 style="font-size: 1.1rem; color: #fff; margin-bottom: 5px; font-weight: 600;">${product.name}</h4>
                             <p style="color: #aaa; font-size: 0.85rem; line-height: 1.4;">${product.description || ''}</p>
                             ${allergenTags ? `<div class="allergen-tags" style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;">${allergenTags}</div>` : ''}
                         </div>
-                        <span class="menu-item-price" style="font-size: 1.3rem; font-weight: 700; color: #D4A017; background: linear-gradient(135deg, #C41E3A, #8B0000); padding: 8px 15px; border-radius: 8px;">${product.price} TL</span>
+                        <span class="menu-item-price" style="font-size: 1.3rem; font-weight: 700; background: linear-gradient(135deg, #DC143C, #D4A017); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; white-space: nowrap; font-family: 'Playfair Display', serif;">${product.price} TL</span>
                     </div>
                     <div class="nutrition-info" style="background: rgba(255,255,255,0.03); border-radius: 10px; padding: 15px; margin-top: 10px;">
                         <div class="nutrition-row" style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <span style="display: flex; align-items: center; gap: 8px; color: #aaa; font-size: 0.85rem;"><i class="fas fa-fire" style="color: #D4A017; width: 20px;"></i> Enerji</span>
-                            <span style="color: #fff; font-weight: 500; font-size: 0.9rem;"><span style="display: inline-flex; align-items: center; gap: 5px; background: linear-gradient(135deg, #D4A017, #B8860B); color: #111; padding: 5px 12px; border-radius: 20px; font-weight: 700; font-size: 0.85rem;"><i class="fas fa-fire"></i> ${product.calories || 0} kcal</span></span>
+                            <span style="display: flex; align-items: center; gap: 8px; color: #aaa; font-size: 0.85rem;"><i class="fas fa-fire" style="color: #DC143C; width: 20px;"></i> Enerji</span>
+                            <span style="color: #fff; font-weight: 500; font-size: 0.9rem;"><span style="display: inline-flex; align-items: center; gap: 5px; background: linear-gradient(135deg, #DC143C, #FF4500); color: #fff; padding: 5px 12px; border-radius: 20px; font-weight: 700; font-size: 0.85rem;"><i class="fas fa-fire"></i> ${product.calories || 0} kcal</span></span>
                         </div>
                         <div class="nutrition-row" style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <span style="display: flex; align-items: center; gap: 8px; color: #aaa; font-size: 0.85rem;"><i class="fas fa-flask" style="color: #D4A017; width: 20px;"></i> İçerik</span>
+                            <span style="display: flex; align-items: center; gap: 8px; color: #aaa; font-size: 0.85rem;"><i class="fas fa-flask" style="color: #DC143C; width: 20px;"></i> İçerik</span>
                             <span style="color: #fff; font-weight: 500; font-size: 0.9rem; text-align: right; max-width: 60%;">${product.ingredients || 'Bilgi yok'}</span>
                         </div>
                         <div class="nutrition-row" style="display: flex; justify-content: space-between; padding: 8px 0;">
-                            <span style="display: flex; align-items: center; gap: 8px; color: #aaa; font-size: 0.85rem;"><i class="fas fa-bread-slice" style="color: #D4A017; width: 20px;"></i> Alerjenler</span>
+                            <span style="display: flex; align-items: center; gap: 8px; color: #aaa; font-size: 0.85rem;"><i class="fas fa-bread-slice" style="color: #DC143C; width: 20px;"></i> Alerjenler</span>
                             <span style="color: #fff; font-weight: 500; font-size: 0.9rem;">${product.allergens ? product.allergens.join(', ') : 'Yok'}</span>
                         </div>
                     </div>
